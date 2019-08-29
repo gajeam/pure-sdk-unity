@@ -23,9 +23,10 @@ public class EmitIfTracking : MonoBehaviour
         if (!tracking.IsTracking())
         {
             nextEmission = Time.realtimeSinceStartup + incomeEveryNSeconds;
+            return;
         }
         
-        if (!tracking.IsTracking() || Time.time < nextEmission)
+        if (Time.time < nextEmission)
         {
             return;
         }

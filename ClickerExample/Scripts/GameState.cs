@@ -11,6 +11,7 @@ public class GameState : MonoBehaviour
     public int income = 1;
     public int upgradeCost = 10;
     public int nextUpgradeSize = 1;
+    public bool showTutorial = true;
     public PureSDKComponent tracker;
     
     public void GainIncome()
@@ -48,6 +49,11 @@ public class GameState : MonoBehaviour
             credits = savedCredits;
         }
 
+        if (PlayerPrefs.HasKey("showTutorial"))
+        {
+            showTutorial = bool.Parse(PlayerPrefs.GetString("showTutorial"));
+        }
+
         if (tracker.IsTracking())
         {
             if (PlayerPrefs.HasKey("lastShutdown"))
@@ -64,6 +70,7 @@ public class GameState : MonoBehaviour
     private void OnApplicationQuit()
     {
         PlayerPrefs.SetInt("credits",credits);
+        PlayerPrefs.SetString("showTutorial",showTutorial.ToString());
         PlayerPrefs.SetString("lastShutdown",DateTime.Now.ToString());
     }
     

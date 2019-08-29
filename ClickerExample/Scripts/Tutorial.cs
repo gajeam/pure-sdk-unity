@@ -8,13 +8,13 @@ using UnityEngine.UIElements;
 public class Tutorial : MonoBehaviour, IPointerDownHandler
 {
 
+    public GameState state;
     private int currentStep = 0;
     private int childCount;
-    private bool tutorialComplete;
     // Start is called before the first frame update
     private void Start()
     {
-        if (tutorialComplete)
+        if (state.showTutorial)
         {
             gameObject.SetActive(false);
         }
@@ -31,7 +31,7 @@ public class Tutorial : MonoBehaviour, IPointerDownHandler
         if (currentStep >= childCount)
         {
             gameObject.SetActive(false);
-            tutorialComplete = true;
+            state.showTutorial = false;
         }
         else
         {
