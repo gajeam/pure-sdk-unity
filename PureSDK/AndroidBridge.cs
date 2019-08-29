@@ -1,5 +1,6 @@
 ﻿using PureSDK;
 using UnityEngine;
+using UnityEngine.Android;
 
 namespace Unaty.PureSDK
 {

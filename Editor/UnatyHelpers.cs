@@ -3,7 +3,6 @@ using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEditor.iOS.Xcode;
-using UnityEditor.iOS.Xcode.Extensions;
 using UnityEngine;
 
 public class UnatyHelpers : IPostprocessBuildWithReport
@@ -18,7 +17,27 @@ public class UnatyHelpers : IPostprocessBuildWithReport
 
     private static void copyGradleFile()
     {
-        FileUtil.CopyFileOrDirectory("Assets/Unaty/Editor/AndroidFiles/mainTemplate.gradle","Assets/Plugins/Android/mainTemplate.gradle");
+        var targetUnderAssets = "/Plugins/Android/mainTemplate.gradle";
+        var targetPath = "Assets"+targetUnderAssets;
+        if (File.Exists(Application.dataPath + targetUnderAssets))
+        {
+            Debug.LogError("File already exists: "+targetPath);
+            Debug.Log("Please see refer to readme on how to add needed dependencies manually.");
+            return;
+        }
+
+        var pathOfFolder = Application.dataPath + "/Plugins/Android";
+        if (!Directory.Exists(pathOfFolder))
+        {
+            Directory.CreateDirectory(pathOfFolder);
+            Debug.Log(pathOfFolder + " created");
+        }
+        
+        var pathToGradleFile = AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("puresdk_mainTemplate")[0]);
+        Debug.Log("Created "+targetPath);
+        FileUtil.CopyFileOrDirectory(pathToGradleFile,targetPath);
+        
+        AssetDatabase.Refresh();
     }
 
     public int callbackOrder { get; }
