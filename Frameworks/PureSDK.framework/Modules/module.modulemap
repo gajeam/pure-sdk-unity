@@ -1,0 +1,6 @@
+framework module PureSDK {
+    umbrella header "PureSDK-umbrella.h"
+    
+    export *
+    module * { export * }
+}
