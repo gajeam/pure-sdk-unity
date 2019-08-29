@@ -11,9 +11,8 @@ public class GameState : MonoBehaviour
     public int income = 1;
     public int upgradeCost = 10;
     public int nextUpgradeSize = 1;
-    public bool showTutorial = true;
     public PureSDKComponent tracker;
-    
+
     public void GainIncome()
     {
         credits += income;
@@ -36,7 +35,7 @@ public class GameState : MonoBehaviour
         return credits >= upgradeCost;
     }
 
-    private void Start()
+    private void Awake()
     {
         if (clearPlayerPrefsOnStartup)
         {
@@ -47,11 +46,6 @@ public class GameState : MonoBehaviour
         {
             var savedCredits = PlayerPrefs.GetInt("credits");
             credits = savedCredits;
-        }
-
-        if (PlayerPrefs.HasKey("showTutorial"))
-        {
-            showTutorial = bool.Parse(PlayerPrefs.GetString("showTutorial"));
         }
 
         if (tracker.IsTracking())
@@ -67,11 +61,44 @@ public class GameState : MonoBehaviour
         
     }
 
+    public bool showTutorial
+    {
+        get
+        {
+            if (!PlayerPrefs.HasKey("showTutorial"))
+            {
+                PlayerPrefs.SetString("showTutorial", true.ToString());
+            }
+            return bool.Parse(PlayerPrefs.GetString("showTutorial"));
+        }
+        set
+        {
+            PlayerPrefs.SetString("showTutorial", value.ToString());
+            PlayerPrefs.Save();
+        }
+    }
+
     private void OnApplicationQuit()
     {
+        SaveState();
+    }
+
+    private void OnApplicationPause(bool pauseStatus)
+    {
+        SaveState();
+    }
+
+    private void OnDisable()
+    {
+        SaveState();
+    }
+
+
+    private void SaveState()
+    {
         PlayerPrefs.SetInt("credits",credits);
-        PlayerPrefs.SetString("showTutorial",showTutorial.ToString());
         PlayerPrefs.SetString("lastShutdown",DateTime.Now.ToString());
+        PlayerPrefs.Save();    
     }
     
 }

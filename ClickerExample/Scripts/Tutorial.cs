@@ -14,14 +14,13 @@ public class Tutorial : MonoBehaviour, IPointerDownHandler
     // Start is called before the first frame update
     private void Start()
     {
-        if (state.showTutorial)
+        if (!state.showTutorial)
         {
             gameObject.SetActive(false);
         }
 
         childCount = gameObject.transform.childCount;
         gameObject.transform.GetChild(currentStep).gameObject.SetActive(true);
-
     }
 
     private void ShowNext()

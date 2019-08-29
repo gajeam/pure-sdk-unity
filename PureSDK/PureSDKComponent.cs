@@ -14,7 +14,12 @@ namespace Unaty.PureSDK
         private PureSDK sdk;
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
+        {
+            Init();
+        }
+
+        private void Init()
         {
             sdk = new PureSDK(publishedID);
         }
@@ -33,6 +38,10 @@ namespace Unaty.PureSDK
 
         public bool IsTracking()
         {
+            if (sdk == null)
+            {
+                Init();
+            }
             return sdk.IsTracking();
         }
     }
