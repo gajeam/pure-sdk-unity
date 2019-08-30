@@ -3,38 +3,37 @@
 
 This asset contains Unacast's Pure SDK, along with example code showing how to use the SDK. 
 
-# Install
+# SDK download
 
-## Add code to your project
-### Git submodule
+## Git submodule
 In your project, enter the  `Assets` directory and add `pure-sdk-unity` as a submodule:
 ```
 git submodule add git@github.com:unacast/pure-sdk-unity.git
 ```
     
-### Manual copy
+## Manual copy
 1. Check out or download `pure-sdk-unity` to a location of your choice.
 2. Copy the contents into a sub-directory of your `Assets` in your unity project.
 
-## Unity setup
-
-### Android
+# Android setup
 To enable the Pure SDK for Android, unity needs to download and add the SDK as part of the gradle build step. 
 To do this, a dependency needs to be added to the project gradle file. 
 
 Unity supports this through adding a custom gradle config under `Assets/Plugins/Android/mainTemplate.gradle`
 
-#### No existing `mainTemplate.gradle`.
+## No existing `mainTemplate.gradle`.
 If do not already have a `mainTemplate.gradle` in your project, you can simple add the custom code using the in-editor context menu:
-`Unaty > Android > Create Files` 
+`Unaty > Android > Create Files`:
+
+![android setup menu](android_menu.png)
 
 This adds a new `mainTemplate.gradle` file to your project, which is automatically picked up by Unity when you build your solution for the Android platform.
 
-#### Existing `mainTemplate.gradle`
+## Existing `mainTemplate.gradle`
 If you already have a `mainTemplate.gradle` file in your project, you will need to add the dependency manually as descibed below:
 
-**Add repository**
-As the Pure SDK is hosted on bintray, you will have to add `bintray()` to the repositories section:
+### Add repository
+As the Pure SDK is hosted on bintray, you will have to add this to the repositories section:
 
 ```groovy
 allprojects {
@@ -51,7 +50,7 @@ allprojects {
 }
 ``` 
 
-**Add dependency**
+### Add dependency
 Add `implementation 'com.unacast.pure:pure-sdk:1.2.28.beta3'` to your `dependencies` section: 
 
 ```groovy
@@ -61,7 +60,8 @@ dependencies {
 ```
 NOTE! Make sure you add this to the `dependencies` section of your project, not your buildscript. 
 
-### iOS
+# iOS Setup
+...
 
 # Usage
 To be able to use the Unacast Pure SDK you must first [register as a Unacast Data Partner](https://unacastssp.itera-research.com).
