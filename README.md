@@ -3,22 +3,70 @@
 
 This asset contains Unacast's Pure SDK, along with example code showing how to use the SDK. 
 
-## Install
+# Install
 
+## Add code to your project
 ### Git submodule
+In your project, enter the  `Assets` directory and add `pure-sdk-unity` as a submodule:
+```
+git submodule add git@github.com:unacast/pure-sdk-unity.git
+```
     
 ### Manual copy
+1. Check out or download `pure-sdk-unity` to a location of your choice.
+2. Copy the contents into a sub-directory of your `Assets` in your unity project.
 
-## Update
+## Unity setup
 
-### Git submodule
+### Android
+To enable the Pure SDK for Android, unity needs to download and add the SDK as part of the gradle build step. 
+To do this, a dependency needs to be added to the project gradle file. 
 
-### Manual copy
+Unity supports this through adding a custom gradle config under `Assets/Plugins/Android/mainTemplate.gradle`
 
-## Usage
-To use the Unacast you must first [register as a Unacast Data Partner](https://unacastssp.itera-research.com).
+#### No existing `mainTemplate.gradle`.
+If do not already have a `mainTemplate.gradle` in your project, you can simple add the custom code using the in-editor context menu:
+`Unaty > Android > Create Files` 
 
-### Quick ref
+This adds a new `mainTemplate.gradle` file to your project, which is automatically picked up by Unity when you build your solution for the Android platform.
+
+#### Existing `mainTemplate.gradle`
+If you already have a `mainTemplate.gradle` file in your project, you will need to add the dependency manually as descibed below:
+
+**Add repository**
+As the Pure SDK is hosted on bintray, you will have to add `bintray()` to the repositories section:
+
+```
+allprojects {
+    repositories {**ARTIFACTORYREPOSITORY**
+        google()
+        jcenter()
+        maven {
+            url 'http://dl.bintray.com/unacast/pure' // <-- Add this
+        }         
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+``` 
+
+**Add dependency**
+Add `implementation 'com.unacast.pure:pure-sdk:1.2.28.beta3'` to your `dependencies` section: 
+
+```
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.unacast.pure:pure-sdk:1.2.28.beta3' // <-- Add this
+```
+NOTE! Make sure you add this to the `dependencies` section of your project, not your buildscript. 
+
+### iOS
+
+# Usage
+To use the Unacast Pure SDK you must first [register as a Unacast Data Partner](https://unacastssp.itera-research.com).
+
+## Quick ref
 
 ```csharp
 using Unaty.PureSDK;
@@ -47,29 +95,29 @@ public class ExampleBehaviour : MonoBehaviour
 
 The `PureSDKBridge` class exposes three functions.
 
-### `startTracking()`
+## `startTracking()`
 This function start location tracking and shipping of data to the Unacast APIs from the device. If the user has not (yet) accepted 
 location usage for the application, a system dialog will be shown, asking permission.
 
-### `stopTracking()`
+## `stopTracking()`
 Stops tracking and sending data to the Unacast APIs. 
 
-### `isTracking()`
+## `isTracking()`
 Returns `true` if the user has accepted location tracking.
 
-## Folder Structure
+# Folder Structure
 Below is a description of the structure and contents of this asset.
 
-### ClickerExample
+## ClickerExample
 An example application demonstrating use of the Unacast Pure SDK. 
 Open the scene `ClickerExample/UnacastClicker` to test the application.
 
-### Editor
+## Editor
 Scripts adding helper functionality to the Unity editor to make it easier to use the SDK.
 
-### Frameworks
+## Frameworks
 The PureSDK code used when building applications targeting iOS.
 When building for Android, the SDK is downloaded as part of the Gradle build.
 
-### PureSDK
+## PureSDK
 C# source code the Unacast Pure Unity SDK.
