@@ -652,7 +652,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350.00003, y: -35}
+  m_AnchoredPosition: {x: 350, y: -35}
   m_SizeDelta: {x: 630.00006, y: 95.3}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &362453323
@@ -930,7 +930,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tracking: {fileID: 223754479}
   gameState: {fileID: 2116235946}
-  incomeEveryNSeconds: 1
+  secondsBetweenIncomes: 1
 --- !u!1 &425984086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1428,7 +1428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &783308433
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1788,12 +1788,12 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 150
+  m_Range: 218.8
   m_SpotAngle: 57.7
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -3225,7 +3225,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350.00003, y: -851.65}
+  m_AnchoredPosition: {x: 350, y: -851.65}
   m_SizeDelta: {x: 630.00006, y: 898.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1359195262
@@ -3751,7 +3751,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.107457, g: 0.17781243, b: 0.357, a: 0}
+  m_BackGroundColor: {r: 0.08962262, g: 0.34961876, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3848,7 +3848,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 350.00003, y: -130.29999}
+  m_AnchoredPosition: {x: 350, y: -130.30005}
   m_SizeDelta: {x: 630.00006, y: 272.1}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1530323314
@@ -5734,6 +5734,7 @@ MonoBehaviour:
   income: 1
   upgradeCost: 10
   nextUpgradeSize: 1
+  secondsSincePreviousPlaySession: 0
   tracker: {fileID: 223754479}
   sfx: {fileID: 1749982196}
   upgradeSound: {fileID: 8300000, guid: 5ec70624fb09a5643891bfc29765bace, type: 3}

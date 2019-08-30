@@ -1,38 +1,52 @@
-﻿using Unaty.PureSDK;
+﻿using System;
+using Unaty.PureSDK;
 using UnityEngine;
 
 [RequireComponent(typeof(HexEmitter))]
 public class EmitIfTracking : MonoBehaviour
 {
-    private HexEmitter _emitter;
     public PureSDKComponent tracking;
     public GameState gameState;
-    public float incomeEveryNSeconds = 1;
-    private float nextEmission;
+    
+    public float secondsBetweenIncomes = 1;
+    private HexEmitter _emitter;
+    
+    private float _nextEmission;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         _emitter = GetComponent<HexEmitter>();
-        nextEmission = Time.realtimeSinceStartup + incomeEveryNSeconds;
+        _nextEmission = Time.realtimeSinceStartup + secondsBetweenIncomes;
+        AddBackgroundEarnedIncome();
     }
+
+    private void AddBackgroundEarnedIncome()
+    {
+        if (tracking.IsTracking() && gameState.secondsSincePreviousPlaySession > 0)
+        {
+            gameState.GainIncome(gameState.secondsSincePreviousPlaySession);
+        }
+    }
+    
 
     // Update is called once per frame
     void Update()
     {
         if (!tracking.IsTracking())
         {
-            nextEmission = Time.realtimeSinceStartup + incomeEveryNSeconds;
+            _nextEmission = Time.realtimeSinceStartup + secondsBetweenIncomes;
             return;
         }
         
-        if (Time.time < nextEmission)
+        if (Time.time < _nextEmission)
         {
             return;
         }
 
         _emitter.Emit();
         gameState.GainIncome();
-        nextEmission += incomeEveryNSeconds;
+        _nextEmission += secondsBetweenIncomes;
     }
 }

@@ -38,10 +38,6 @@ namespace Unaty.PureSDK
 
         public bool IsTracking()
         {
-            if (sdk == null)
-            {
-                Init();
-            }
             return sdk.IsTracking();
         }
     }
