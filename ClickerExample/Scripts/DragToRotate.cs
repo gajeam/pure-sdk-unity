@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggToRotate : MonoBehaviour, IPointerDownHandler, IDragHandler
+public class DragToRotate : MonoBehaviour, IPointerDownHandler, IDragHandler
 {
     private Rigidbody body;
     private Vector2 cursorPoint;
@@ -23,7 +23,6 @@ public class DraggToRotate : MonoBehaviour, IPointerDownHandler, IDragHandler
     {
         var mousePos = new Vector2(Input.mousePosition.y, Input.mousePosition.x);
         var diff = cursorPoint - mousePos;
-//        body.AddTorque(new Vector2(-diff.x, diff.y) * force);
         body.angularVelocity = new Vector2(-diff.x, diff.y) * force;
         cursorPoint = mousePos;
     }

@@ -64,7 +64,7 @@ NOTE! Make sure you add this to the `dependencies` section of your project, not 
 ### iOS
 
 # Usage
-To use the Unacast Pure SDK you must first [register as a Unacast Data Partner](https://unacastssp.itera-research.com).
+To be able to use the Unacast Pure SDK you must first [register as a Unacast Data Partner](https://unacastssp.itera-research.com).
 
 ## Quick ref
 
