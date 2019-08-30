@@ -12,6 +12,8 @@ public class GameState : MonoBehaviour
     public int upgradeCost = 10;
     public int nextUpgradeSize = 1;
     public PureSDKComponent tracker;
+    public AudioSource sfx;
+    public AudioClip upgradeSound;
 
     public void GainIncome()
     {
@@ -26,6 +28,7 @@ public class GameState : MonoBehaviour
             nextUpgradeSize *= 2;
             credits -= upgradeCost;
             upgradeCost *= 3;
+            sfx.PlayOneShot(upgradeSound);
         }
         
     }
