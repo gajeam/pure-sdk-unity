@@ -47,9 +47,21 @@ public class GameState : MonoBehaviour
         
         if (PlayerPrefs.HasKey("credits"))
         {
-            var savedCredits = PlayerPrefs.GetInt("credits");
-            credits = savedCredits;
+            credits = PlayerPrefs.GetInt("credits");
         }
+        if (PlayerPrefs.HasKey("upgradeCost"))
+        {
+            upgradeCost = PlayerPrefs.GetInt("upgradeCost");
+        }
+        if (PlayerPrefs.HasKey("income"))
+        {
+            income = PlayerPrefs.GetInt("income");
+        }
+        if (PlayerPrefs.HasKey("nextUpgradeSize"))
+        {
+            nextUpgradeSize = PlayerPrefs.GetInt("nextUpgradeSize");
+        }
+        
 
         if (tracker.IsTracking())
         {
@@ -101,6 +113,9 @@ public class GameState : MonoBehaviour
     {
         PlayerPrefs.SetInt("credits",credits);
         PlayerPrefs.SetString("lastShutdown",DateTime.Now.ToString());
+        PlayerPrefs.SetInt("income",income);
+        PlayerPrefs.SetInt("upgradeCost",upgradeCost);
+        PlayerPrefs.SetInt("nextUpgradeSize",nextUpgradeSize);
         PlayerPrefs.Save();    
     }
     
