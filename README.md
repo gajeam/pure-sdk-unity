@@ -36,7 +36,7 @@ If you already have a `mainTemplate.gradle` file in your project, you will need 
 **Add repository**
 As the Pure SDK is hosted on bintray, you will have to add `bintray()` to the repositories section:
 
-```
+```groovy
 allprojects {
     repositories {**ARTIFACTORYREPOSITORY**
         google()
@@ -54,7 +54,7 @@ allprojects {
 **Add dependency**
 Add `implementation 'com.unacast.pure:pure-sdk:1.2.28.beta3'` to your `dependencies` section: 
 
-```
+```groovy
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.unacast.pure:pure-sdk:1.2.28.beta3' // <-- Add this
