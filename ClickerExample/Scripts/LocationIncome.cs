@@ -1,9 +1,8 @@
-﻿using System;
-using Unaty.PureSDK;
+﻿using Unaty.PureSDK;
 using UnityEngine;
 
 [RequireComponent(typeof(HexEmitter))]
-public class EmitIfTracking : MonoBehaviour
+public class LocationIncome : MonoBehaviour
 {
     public PureSDKComponent tracking;
     public GameState gameState;
@@ -12,16 +11,15 @@ public class EmitIfTracking : MonoBehaviour
     private HexEmitter _emitter;
     
     private float _nextEmission;
-    
 
-    // Start is called before the first frame update
     void Start()
     {
         _emitter = GetComponent<HexEmitter>();
         _nextEmission = Time.realtimeSinceStartup + secondsBetweenIncomes;
-        AddBackgroundEarnedIncome();
+        AddBackgroundEarnedIncome(); 
     }
 
+    //Checks to see if game has been closed while tracking was enabled and awards the corresponding income.
     private void AddBackgroundEarnedIncome()
     {
         if (tracking.IsTracking() && gameState.secondsSincePreviousPlaySession > 0)
@@ -31,12 +29,13 @@ public class EmitIfTracking : MonoBehaviour
     }
     
 
-    // Update is called once per frame
+    //Awards income every second while tracking is enabled
     void Update()
     {
         if (!tracking.IsTracking())
         {
-            _nextEmission = Time.realtimeSinceStartup + secondsBetweenIncomes;
+            //Using realtime causes this code to give a "burst" of income if game has been paused.
+            _nextEmission = Time.realtimeSinceStartup + secondsBetweenIncomes; 
             return;
         }
         
