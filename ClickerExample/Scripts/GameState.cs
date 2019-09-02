@@ -18,7 +18,7 @@ public class GameState : MonoBehaviour
 
     public void GainIncome(int times = 1)
     {
-        credits += income*times;
+        credits += income * times;
     }
 
     public void Upgrade()
