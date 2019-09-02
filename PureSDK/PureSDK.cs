@@ -6,7 +6,7 @@ namespace Unaty.PureSDK
     public class PureSDK : IPureSdk
     {
         
-        private IPureSdk bridge;
+        private readonly IPureSdk _bridge;
 
         public PureSDK(string publisherID)
         {
@@ -14,7 +14,7 @@ namespace Unaty.PureSDK
             {
                 case RuntimePlatform.Android:
                     #if UNITY_ANDROID
-                    bridge = new AndroidBridge();
+                    _bridge = new AndroidBridge(publisherID);
                     #endif
                     break;
                 case RuntimePlatform.IPhonePlayer:
@@ -25,7 +25,7 @@ namespace Unaty.PureSDK
                 default:
                     Debug.Log("Unacast SDK only available on iOS/Android - not a valid platform [" + Application.platform +
                               "] using mocked functionality.");
-                    bridge = new FakeBridge();
+                    _bridge = new FakeBridge();
                     break;
             }
         }
@@ -36,7 +36,7 @@ namespace Unaty.PureSDK
         /// </summary>
         public void StartTracking()
         {
-            bridge.StartTracking();
+            _bridge.StartTracking();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Unaty.PureSDK
         /// </summary>
         public void StopTracking()
         {
-            bridge.StopTracking();
+            _bridge.StopTracking();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Unaty.PureSDK
         /// <returns>true if tracking is enabled</returns>
         public bool IsTracking()
         {
-            return bridge.IsTracking();
+            return _bridge.IsTracking();
         }
     }
 }

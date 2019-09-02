@@ -1,4 +1,5 @@
-﻿using PureSDK;
+﻿using System;
+using PureSDK;
 using UnityEngine;
 using UnityEngine.Android;
 
@@ -8,17 +9,19 @@ namespace Unaty.PureSDK
     {
         private readonly AndroidJavaObject sdk;
         private bool isTracking;
-        public AndroidBridge()
+
+        private bool _waitingForUserToAcceptLocation;
+        public AndroidBridge(String publisherId)
         {
 #if UNITY_ANDROID
-            AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-            AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-            AndroidJavaObject context = activity.Call<AndroidJavaObject>("getApplicationContext");
+            var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+            var activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+            var context = activity.Call<AndroidJavaObject>("getApplicationContext");
 
             var sdkClass = new AndroidJavaClass("com.pure.sdk.Pure");
             sdk = sdkClass.CallStatic<AndroidJavaObject>("getInstance", context);
-            sdk.Call("init","no-publisher-id");
-            isTracking = sdk.CallStatic<bool>("getIsTracking");
+            sdk.Call("init",publisherId, null);
+            isTracking = sdk.Call<bool>("isTracking");
 #endif
         }
 
@@ -28,32 +31,30 @@ namespace Unaty.PureSDK
             if (!Permission.HasUserAuthorizedPermission(Permission.FineLocation))
             {
                 Permission.RequestUserPermission(Permission.FineLocation);
+                _waitingForUserToAcceptLocation = true;
             }
 
-            if (Permission.HasUserAuthorizedPermission(Permission.FineLocation))
-            {
-                Debug.Log("Start tracking");
-                sdk.CallStatic("startTracking");
-                isTracking = true;
-            }
-            else
-            {
-                Debug.Log("User denied location access");
-            }
+            Debug.Log("Start tracking");
+            sdk.Call("startTracking");
+            isTracking = true;
 #endif
         }
     
         public void StopTracking()
         {
 #if UNITY_ANDROID
-            sdk.CallStatic("stopTracking");
+            sdk.Call("stopTracking");
 #endif
             isTracking = false;
         }
 
         public bool IsTracking()
         {
-            return isTracking;
+            if (isTracking && _waitingForUserToAcceptLocation)
+            {
+                _waitingForUserToAcceptLocation = !Permission.HasUserAuthorizedPermission(Permission.FineLocation);
+            }
+            return isTracking && !_waitingForUserToAcceptLocation;
         }
     }
 }
