@@ -8,10 +8,7 @@ using UnityEngine;
 
 public class IOSPostProcessor : IPostprocessBuildWithReport
 {
-    public static bool generatePlistEntries = false;
-
-    public static string usageDescription =
-        "By allowing us to collect this information, you earn income every second, even when not playing!";
+    public static bool generatePlistEntries = true;
 
     public int callbackOrder { get; }
 
@@ -39,9 +36,15 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
             return;
         }
 
-        SetPlistKey(rootDict, "NSLocationWhenInUseUsageDescription", usageDescription);
-        SetPlistKey(rootDict, "NSLocationAlwaysUsageDescription", usageDescription);
-        SetPlistKey(rootDict, "NSLocationAlwaysAndWhenInUseUsageDescription", usageDescription);
+        var locationUsageDescription = PlayerSettings.iOS.locationUsageDescription;
+        if (locationUsageDescription == null || locationUsageDescription.Trim() == "")
+        {
+            Debug.LogWarning("Location Usage Description is blank. Make sure you give your users a good description of why you are asking for Location!");
+        }
+        
+        SetPlistKey(rootDict, "NSLocationWhenInUseUsageDescription", locationUsageDescription);
+        SetPlistKey(rootDict, "NSLocationAlwaysUsageDescription", locationUsageDescription);
+        SetPlistKey(rootDict, "NSLocationAlwaysAndWhenInUseUsageDescription", locationUsageDescription);
 
         // Write to file
         File.WriteAllText(plistPath, plist.WriteToString());
