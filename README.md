@@ -2,6 +2,8 @@
 **IMPORTANT: This asset is only useful if you are a registered data partner of Unacast Inc.**
 
 This asset contains Unacast's Pure SDK, along with example code showing how to use the SDK. 
+The Unity Pure SDK supplies a cross platform API that allows developers to develop games and application 
+in Unity targeting Android and/or iOS using the same code when connecting to the SDK.  
 
 # SDK download
 
