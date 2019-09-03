@@ -19,11 +19,11 @@ namespace Unaty.PureSDK
                     break;
                 case RuntimePlatform.IPhonePlayer:
                     #if UNITY_IOS
-                    bridge = new IosBridge();
+                    _bridge = new IosBridge();
                     #endif
                     break;
                 default:
-                    Debug.Log("Unacast SDK only available on iOS/Android - not a valid platform [" + Application.platform +
+                    Debug.Log("Unacast SDK only available on iOS/Android - unsupported platform [" + Application.platform +
                               "] using mocked functionality.");
                     _bridge = new FakeBridge();
                     break;
