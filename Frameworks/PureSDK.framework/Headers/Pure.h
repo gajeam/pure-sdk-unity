@@ -71,6 +71,9 @@ typedef void(^PURErrorBlock)(NSError * _Nullable error);
 /// It's safe to call `initializeWithLaunchOptions:` multiple times.
 @property (nonatomic, class, readonly) BOOL isInitialized;
 
+/// Apps with the same publisherId will have their data linked.
+@property (nonatomic, class) NSString *publisherId;
+
 /// We log calls to `initializeWithLaunchOptions:`, `startTracking`, and `stopTracking` in order to provide our clients with
 /// a more complete picture of the devices which have PureSDK enabled. If lightweight analytics are enabled, session lengths
 /// are also included in some payloads.
