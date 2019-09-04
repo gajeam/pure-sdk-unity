@@ -17,7 +17,24 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
         if (report.summary.platform == BuildTarget.iOS)
         {
             AddPlistEntries(report);
+            AddShellScriptBuildPhase(report);
         }
+    }
+
+    private void AddShellScriptBuildPhase(BuildReport report)
+    {
+        
+        var pathToBuiltProject = report.summary.outputPath;
+        string projPath = PBXProject.GetPBXProjectPath(report.summary.outputPath);
+
+        PBXProject proj = new PBXProject();
+        proj.ReadFromString(File.ReadAllText(projPath));
+        
+        proj.InsertShellScriptBuildPhase(100,proj.TargetGuidByName("Unity-iPhone"), 
+            "Strip Invalid Archs", 
+            "/bin/sh", 
+            "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDK.framework/strip-frameworks.sh\"" );
+        proj.WriteToFile(projPath);
     }
 
     private void AddPlistEntries(BuildReport report)

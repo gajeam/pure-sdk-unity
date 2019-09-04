@@ -27,11 +27,33 @@
 	return [Pure isTracking];
 }
 
+- (void)setPublisherId:(NSString *) id
+{
+	Pure.publisherId = id;
+}
+
 @end
 
 static IOSWrapper* iosWrapperInstance = nil;
 
+// Converts C style string to NSString
+NSString* CreateNSString (const char* string)
+{
+	if (string)
+	return [NSString stringWithUTF8String: string];
+	else
+	return [NSString stringWithUTF8String: ""];
+}
+
 extern "C" {
+
+	void _SetPublisherID (const char* publisherID)
+	{
+		if (iosWrapperInstance == nil)
+			iosWrapperInstance = [[IOSWrapper alloc] init];
+		
+		[iosWrapperInstance setPublisherId: CreateNSString(publisherID)];
+	}
 
 	void _StartTracking ()
 	{
@@ -50,7 +72,7 @@ extern "C" {
         
         [iosWrapperInstance stopTracking];  
     }
-    
+
     bool _IsTracking ()
     {
     
