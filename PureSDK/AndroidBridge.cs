@@ -7,22 +7,28 @@ namespace Unaty.PureSDK
 {
     internal class AndroidBridge : IPureSdk
     {
-        private readonly AndroidJavaObject sdk;
         private bool isTracking;
 
         private bool _waitingForUserToAcceptLocation;
+        private readonly AndroidJavaObject _applicationContext;
+
         public AndroidBridge(String publisherId)
         {
 #if UNITY_ANDROID
             var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
             var activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
-            var context = activity.Call<AndroidJavaObject>("getApplicationContext");
-
-            var sdkClass = new AndroidJavaClass("com.pure.sdk.Pure");
-            sdk = sdkClass.CallStatic<AndroidJavaObject>("getInstance", context);
+            _applicationContext = activity.Call<AndroidJavaObject>("getApplicationContext");
+            
+            var sdk = GetSDK();
             sdk.Call("init",publisherId, null);
             isTracking = sdk.Call<bool>("isTracking");
 #endif
+        }
+
+        private AndroidJavaObject GetSDK()
+        {
+            var sdkClass = new AndroidJavaClass("com.pure.sdk.Pure");
+            return sdkClass.CallStatic<AndroidJavaObject>("getInstance", _applicationContext);
         }
 
         public void StartTracking()
@@ -34,8 +40,7 @@ namespace Unaty.PureSDK
                 _waitingForUserToAcceptLocation = true;
             }
 
-            Debug.Log("Start tracking");
-            sdk.Call("startTracking");
+            GetSDK().Call("startTracking");
             isTracking = true;
 #endif
         }
@@ -43,7 +48,7 @@ namespace Unaty.PureSDK
         public void StopTracking()
         {
 #if UNITY_ANDROID
-            sdk.Call("stopTracking");
+            GetSDK().Call("stopTracking");
 #endif
             isTracking = false;
         }
