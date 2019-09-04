@@ -11,5 +11,8 @@
 // To check if we are tracking. State is remembered between launches.
 - (BOOL)isTracking;
 
+// Set the publisher id to be sendt to the API
+- (void)setPublisherId:(NSString *) id;
+
 @end
 

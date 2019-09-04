@@ -16,14 +16,19 @@ internal class IosBridge : IPureSdk
     [DllImport("__Internal")]
     private static extern bool _IsTracking();
 
+    [DllImport("__Internal")]
+    private static extern void _SetPublisherID(string publisherId);
+
     #endif
     
     private bool _isTracking;
     
-    public IosBridge()
+    public IosBridge(string publisherId)
     {
         #if UNITY_IOS
-        _isTracking = IsTracking();
+        Debug.Log("Setting publisher ID to " + publisherId);
+        _SetPublisherID(publisherId);
+        _isTracking = _IsTracking();
         #endif
     }
 

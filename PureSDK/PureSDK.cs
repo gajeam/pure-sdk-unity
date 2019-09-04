@@ -19,7 +19,7 @@ namespace Unaty.PureSDK
                     break;
                 case RuntimePlatform.IPhonePlayer:
                     #if UNITY_IOS
-                    _bridge = new IosBridge();
+                    _bridge = new IosBridge(publisherID);
                     #endif
                     break;
                 default:
