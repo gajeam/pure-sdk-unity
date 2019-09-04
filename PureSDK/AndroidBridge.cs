@@ -9,7 +9,7 @@ namespace Unaty.PureSDK
     {
         private bool isTracking;
         private bool _waitingForUserToAcceptLocation;
-        
+
 #if UNITY_ANDROID
         private readonly AndroidJavaObject _applicationContext;
 #endif
@@ -19,18 +19,20 @@ namespace Unaty.PureSDK
             var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
             var activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
             _applicationContext = activity.Call<AndroidJavaObject>("getApplicationContext");
-            
+
             var sdk = GetSDK();
-            sdk.Call("init",publisherId, null);
+            sdk.Call("init", publisherId, null);
             isTracking = sdk.Call<bool>("isTracking");
 #endif
         }
 
+#if UNITY_ANDROID
         private AndroidJavaObject GetSDK()
         {
             var sdkClass = new AndroidJavaClass("com.pure.sdk.Pure");
             return sdkClass.CallStatic<AndroidJavaObject>("getInstance", _applicationContext);
         }
+#endif
 
         public void StartTracking()
         {
@@ -45,7 +47,7 @@ namespace Unaty.PureSDK
             isTracking = true;
 #endif
         }
-    
+
         public void StopTracking()
         {
 #if UNITY_ANDROID
@@ -60,6 +62,7 @@ namespace Unaty.PureSDK
             {
                 _waitingForUserToAcceptLocation = !Permission.HasUserAuthorizedPermission(Permission.FineLocation);
             }
+
             return isTracking && !_waitingForUserToAcceptLocation;
         }
     }
