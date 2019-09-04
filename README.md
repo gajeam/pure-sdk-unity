@@ -5,6 +5,11 @@ This asset contains Unacast's Pure SDK, along with example code showing how to u
 The Unity Pure SDK supplies a cross platform API that allows developers to develop games and application 
 in Unity targeting Android and/or iOS using the same code when connecting to the SDK.  
 
+## Unity Compatibility
+The SDK has been tested and verified in the following verions of Unity 3D:
+-   2019.2.2f1
+
+
 # SDK download
 
 ## Git submodule
