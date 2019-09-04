@@ -8,10 +8,11 @@ namespace Unaty.PureSDK
     internal class AndroidBridge : IPureSdk
     {
         private bool isTracking;
-
         private bool _waitingForUserToAcceptLocation;
+        
+#if UNITY_ANDROID
         private readonly AndroidJavaObject _applicationContext;
-
+#endif
         public AndroidBridge(String publisherId)
         {
 #if UNITY_ANDROID
