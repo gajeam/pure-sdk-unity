@@ -7,7 +7,9 @@ in Unity targeting Android and/or iOS using the same code when connecting to the
 
 ## Unity Compatibility
 The SDK has been tested and verified in the following verions of Unity 3D:
--   2019.2.2f1
+- 2019.3.0b1
+- 2019.2.2f1
+- 2018.4.8f1 (LTS)
 
 
 # SDK download
