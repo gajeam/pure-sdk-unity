@@ -4036,11 +4036,11 @@ MonoBehaviour:
   m_text: "By allowing the use of your location even while the app is not in use you
     will earn a reward in the form of a continuous income of in-game currency. \n\nThe
     data provided by your phone (i.e. geolocation data, advertising ID, device and
-    connection details) will be used by Unacast and our <link=\"https://www.unacast.com/privacy/statement\"><color=\"blue\"><u>trusted
+    connection details) will be used by Unacast and our <link=\"https://www.unacast.com/privacy/statement#thirdParties\"><color=\"blue\"><u>trusted
     partners</u></color></link> for the purposes of enhancing ad experience, market
     research and analytics. \n\nIf you agree that we may collect and process your
     personal data for all purposes above, please confirm by clicking \u201CAllow\u201D
-    below. You may at any time <link=\"https://www.unacast.com/privacy/policy\"><color=\"blue\"><u>exercise
+    below. You may at any time <link=\"https://www.unacast.com/privacy/statement#rights\"><color=\"blue\"><u>exercise
     your rights</u></color></link> (right of access or rectification of your data
     etc.) and withdraw your consent."
   m_isRightToLeft: 0
@@ -4163,6 +4163,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 78385639}
     m_Modifications:
+    - target: {fileID: 100000, guid: 6abba2bf917ff43059167f1f4b3236de, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 6abba2bf917ff43059167f1f4b3236de, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -4170,10 +4174,6 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 6abba2bf917ff43059167f1f4b3236de, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 6abba2bf917ff43059167f1f4b3236de, type: 3}
-      propertyPath: m_Layer
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 6abba2bf917ff43059167f1f4b3236de,
         type: 3}
@@ -4527,11 +4527,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 834198452}
     m_Modifications:
-    - target: {fileID: 2093294847026886363, guid: 1193bfeb5e08143c2936875201fa12f5,
-        type: 3}
-      propertyPath: m_Name
-      value: LocationEmitter
-      objectReference: {fileID: 0}
     - target: {fileID: 2093294847026886360, guid: 1193bfeb5e08143c2936875201fa12f5,
         type: 3}
       propertyPath: particleToSpawn
@@ -4547,6 +4542,11 @@ PrefabInstance:
         type: 3}
       propertyPath: powerRandomness
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093294847026886363, guid: 1193bfeb5e08143c2936875201fa12f5,
+        type: 3}
+      propertyPath: m_Name
+      value: LocationEmitter
       objectReference: {fileID: 0}
     - target: {fileID: 2093294847026886361, guid: 1193bfeb5e08143c2936875201fa12f5,
         type: 3}
@@ -5780,15 +5780,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2093294847026886363, guid: 1193bfeb5e08143c2936875201fa12f5,
-        type: 3}
-      propertyPath: m_Name
-      value: HexEmitter
-      objectReference: {fileID: 0}
     - target: {fileID: 2093294847026886360, guid: 1193bfeb5e08143c2936875201fa12f5,
         type: 3}
       propertyPath: emissionPower
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093294847026886363, guid: 1193bfeb5e08143c2936875201fa12f5,
+        type: 3}
+      propertyPath: m_Name
+      value: HexEmitter
       objectReference: {fileID: 0}
     - target: {fileID: 2093294847026886361, guid: 1193bfeb5e08143c2936875201fa12f5,
         type: 3}
