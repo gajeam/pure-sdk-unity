@@ -70,11 +70,17 @@ dependencies {
 NOTE! Make sure you add this to the `dependencies` section of your project, not your buildscript. 
 
 # iOS Setup
-...
+To enable the SDK for iOS there you need to location permission values to your [plist.info](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html) 
 
+This can be done by using the unity custom menu and invoking iOS.
+![iOS setup menu](ios_menu.png)
+
+This will open a dialog where you enter the information on why you are asking for location permission from your user.
+![iOS plist dialog](ios_plist.png)
 # Usage
 To be able to use the Unacast Pure SDK you must first [register as a Unacast Data Partner](https://unacastssp.itera-research.com).
 
+An embedded binary of the SDK, SDK initialization and build phase script will be added when you build your Unity project to iOS. 
 ## Quick ref
 
 ```csharp
