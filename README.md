@@ -136,3 +136,9 @@ When building for Android, the SDK is downloaded as part of the Gradle build.
 
 ## PureSDK
 C# source code the Unacast Pure Unity SDK.
+
+
+# Known Issues
+
+## Android
+If you are using [Proguard](https://www.guardsquare.com/en/products/proguard) to reduce the size of your APKs, make sure you add config to keep the SDK classes, or you will get `ClassNotFoundException` at runtime.
