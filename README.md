@@ -7,7 +7,7 @@ in Unity targeting Android and/or iOS using the same code when connecting to the
 
 ## Unity Compatibility
 The SDK has been tested and verified in the following verions of Unity 3D:
-- 2019.3.0b1
+- 2019.3.0b1 - Working. You need to manually import Text Mesh Pro essentials if you are not already using TMP in your project. `Window > TextMeshPro > Import TMP Essential Resources`
 - 2019.2.2f1 - Supported
 - 2018.4.8f1 (LTS) - SDK works, but examples use the new UI package "Unity UI" from 2019 version of Unity, which is incompatible with this version of Unity.
 
