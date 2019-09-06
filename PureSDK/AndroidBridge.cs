@@ -1,5 +1,4 @@
-﻿using System;
-using PureSDK;
+﻿using PureSDK;
 using UnityEngine;
 using UnityEngine.Android;
 
@@ -13,7 +12,7 @@ namespace Unaty.PureSDK
 #if UNITY_ANDROID
         private readonly AndroidJavaObject _applicationContext;
 #endif
-        public AndroidBridge(String publisherId)
+        public AndroidBridge(string publisherId)
         {
 #if UNITY_ANDROID
             var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");

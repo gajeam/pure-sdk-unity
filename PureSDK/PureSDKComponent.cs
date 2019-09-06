@@ -1,5 +1,4 @@
-﻿using System;
-using PureSDK;
+﻿using PureSDK;
 using UnityEngine;
 
 namespace Unaty.PureSDK
@@ -13,7 +12,6 @@ namespace Unaty.PureSDK
 
         private PureSDK sdk;
 
-        // Start is called before the first frame update
         void Awake()
         {
             Init();
