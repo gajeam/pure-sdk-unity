@@ -3,7 +3,10 @@ using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 
 #if UNITY_IOS
+using System.IO;
 using UnityEditor.iOS.Xcode;
+using UnityEngine;
+
 #endif
 
 public class IOSPostProcessor : IPostprocessBuildWithReport
