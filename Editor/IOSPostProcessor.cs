@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
+
+#if UNITY_IOS
 using UnityEditor.iOS.Xcode;
-using UnityEngine;
+#endif
 
 public class IOSPostProcessor : IPostprocessBuildWithReport
 {
@@ -16,30 +16,30 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
     {
         if (report.summary.platform == BuildTarget.iOS)
         {
+#if UNITY_IOS
             AddPlistEntries(report);
             AddShellScriptBuildPhase(report);
+#endif
         }
     }
-
+#if UNITY_IOS
     private void AddShellScriptBuildPhase(BuildReport report)
     {
-        
         var pathToBuiltProject = report.summary.outputPath;
         string projPath = PBXProject.GetPBXProjectPath(report.summary.outputPath);
 
         PBXProject proj = new PBXProject();
         proj.ReadFromString(File.ReadAllText(projPath));
-        
-        proj.InsertShellScriptBuildPhase(100,proj.TargetGuidByName("Unity-iPhone"), 
-            "Strip Invalid Archs", 
-            "/bin/sh", 
-            "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDK.framework/strip-frameworks.sh\"" );
+
+        proj.InsertShellScriptBuildPhase(100, proj.TargetGuidByName("Unity-iPhone"),
+            "Strip Invalid Archs",
+            "/bin/sh",
+            "bash \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureSDK.framework/strip-frameworks.sh\"");
         proj.WriteToFile(projPath);
     }
 
     private void AddPlistEntries(BuildReport report)
     {
-
         var plistPath = GetPlistPath(report);
         var plist = new PlistDocument();
         plist.ReadFromFile(plistPath);
@@ -56,9 +56,10 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
         var locationUsageDescription = PlayerSettings.iOS.locationUsageDescription;
         if (locationUsageDescription == null || locationUsageDescription.Trim() == "")
         {
-            Debug.LogWarning("Location Usage Description is blank. Make sure you give your users a good description of why you are asking for Location!");
+            Debug.LogWarning(
+                "Location Usage Description is blank. Make sure you give your users a good description of why you are asking for Location!");
         }
-        
+
         SetPlistKey(rootDict, "NSLocationWhenInUseUsageDescription", locationUsageDescription);
         SetPlistKey(rootDict, "NSLocationAlwaysUsageDescription", locationUsageDescription);
         SetPlistKey(rootDict, "NSLocationAlwaysAndWhenInUseUsageDescription", locationUsageDescription);
@@ -93,7 +94,7 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
     {
         if (rootDict[key] != null && rootDict[key].AsString() != value)
         {
-            Debug.LogWarning("Existing ["+key+"] in Info.plist with value:\n  " +
+            Debug.LogWarning("Existing [" + key + "] in Info.plist with value:\n  " +
                              rootDict[key].AsString() +
                              "\noverridden by Unacast Pure SDK using text: \n  " + value + "\n" +
                              "If this was unintended, disable this option under \"Unacast Pure SDK > Configure Project > iOS > Information Property List Entries ...\"");
@@ -101,4 +102,5 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
 
         rootDict.SetString(key, value);
     }
+#endif
 }
