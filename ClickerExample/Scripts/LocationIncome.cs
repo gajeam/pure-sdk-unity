@@ -39,7 +39,7 @@ public class LocationIncome : MonoBehaviour
             return;
         }
         
-        if (Time.time < _nextEmission)
+        if (Time.realtimeSinceStartup < _nextEmission)
         {
             return;
         }
