@@ -15,7 +15,6 @@ public class Tutorial : MonoBehaviour, IPointerDownHandler
             gameObject.SetActive(false);
         }
 
-        childCount = gameObject.transform.childCount;
         gameObject.transform.GetChild(currentStep).gameObject.SetActive(true);
     }
 
@@ -23,7 +22,7 @@ public class Tutorial : MonoBehaviour, IPointerDownHandler
     {
         gameObject.transform.GetChild(currentStep).gameObject.SetActive(false);
         currentStep++;
-        if (currentStep >= childCount)
+        if (currentStep >= gameObject.transform.childCount)
         {
             gameObject.SetActive(false);
             state.showTutorial = false;
