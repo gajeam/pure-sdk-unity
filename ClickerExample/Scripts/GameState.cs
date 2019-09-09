@@ -116,7 +116,17 @@ public class GameState : MonoBehaviour
 
     private void OnApplicationPause(bool pauseStatus)
     {
-        SaveState();
+        if (!pauseStatus)
+        {
+            if (PlayerPrefs.HasKey("lastPause"))
+            {
+                secondsPaused = (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).Seconds;
+            }
+        }
+        else
+        {
+            SaveOnPause();
+        }
     }
 
     private void OnDisable()

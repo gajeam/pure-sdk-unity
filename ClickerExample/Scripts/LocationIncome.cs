@@ -17,13 +17,14 @@ public class LocationIncome : MonoBehaviour
     void Start()
     {
         _emitter = GetComponent<HexEmitter>();
-        _nextEmission = Time.realtimeSinceStartup + secondsBetweenIncomes;
+        _nextEmission = Time.time + secondsBetweenIncomes;
         BackgroundIncome(gameState.secondsSincePreviousPlaySession);
     }
 
     //Checks to see if game has been closed while tracking was enabled and awards the corresponding income.
     private void BackgroundIncome(int seconds)
     {
+        Debug.Log("Background income! "+seconds);
         if (tracking.IsTracking() && seconds > 0)
         {
             gameState.GainIncome(seconds);
@@ -36,12 +37,12 @@ public class LocationIncome : MonoBehaviour
     {
         if (!tracking.IsTracking())
         {
-            //Using realtime causes this code to give a "burst" of income if game has been paused.
-            _nextEmission = Time.realtimeSinceStartup + secondsBetweenIncomes;
+            _nextEmission = Time.time + secondsBetweenIncomes;
             return;
         }
+        BackgroundIncome(gameState.secondsPaused);
 
-        if (Time.realtimeSinceStartup < _nextEmission)
+        if (Time.time < _nextEmission)
         {
             return;
         }
@@ -50,6 +51,5 @@ public class LocationIncome : MonoBehaviour
         gameState.GainIncome();
         _nextEmission += secondsBetweenIncomes;
 
-        BackgroundIncome(gameState.secondsPaused);
     }
 }
