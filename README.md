@@ -70,7 +70,7 @@ dependencies {
 NOTE! Make sure you add this to the `dependencies` section of your project, not your buildscript. 
 
 # iOS Setup
-To enable the SDK for iOS there you need to location permission values to your [plist.info](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html) 
+To enable the SDK for iOS you need to add location permission values to your [plist.info](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html) 
 
 This can be done by using the unity custom menu and invoking iOS.
 ![iOS setup menu](ios_menu.png)
