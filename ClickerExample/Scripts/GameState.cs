@@ -144,6 +144,12 @@ public class GameState : MonoBehaviour
         PlayerPrefs.SetString("lastPause", DateTime.Now.ToString());
     }
 
+    [ContextMenu("Clear Player Preferences")]
+    public void ClearPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+    
     private void LoadState()
     {
         if (clearPlayerPrefsOnStartup)
@@ -168,7 +174,8 @@ public class GameState : MonoBehaviour
         
         if (PlayerPrefs.HasKey("age"))
         {
-            age = PlayerPrefs.GetInt("age");
+            var age = PlayerPrefs.GetInt("age");
+            RegisterAge(age);
         }
 
         if (PlayerPrefs.HasKey("nextUpgradeSize"))
