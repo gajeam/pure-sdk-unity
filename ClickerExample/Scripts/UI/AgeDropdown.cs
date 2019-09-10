@@ -18,7 +18,6 @@ public class AgeDropdown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("START! Check that age is set. Age=" + gameState.age);
         if (gameState.IsAgeSubmitted())
         {
             gameObject.SetActive(false);

@@ -1,36 +1,42 @@
-﻿using System.IO;
+
+using System.Collections.Generic;
+using System.IO;
 using PureSDK;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class PureSDKConfigMenu : EditorWindow
+class PureSDKSettingsMenu : SettingsProvider
 {
-    
-    
-    private const string MenuPath =
-        "Unacast Pure SDK/Configure SDK ...";
+    private const string SettingsMenuPath = "Project/Pure SDK";
+    private PureSDKConfig settings;
 
     private int tab;
-    [MenuItem(MenuPath)]
-    static void Init()
+
+    public PureSDKSettingsMenu(string path, SettingsScope scope = SettingsScope.User)
+        : base(path, scope) {}
+
+    public override void OnActivate(string searchContext, VisualElement rootElement)
     {
-        // Get existing open window or if none, make a new one:
-        PureSDKConfigMenu window = (PureSDKConfigMenu) GetWindow(typeof(PureSDKConfigMenu), false, "iOS - Override PList Entries", true);
-        window.Show();
+        // This function is called when the user clicks on the MyCustom element in the Settings window.
+        settings = PureSDKConfig.GetOrCreateSettings();
     }
 
-    void OnGUI()
+    public override void OnDeactivate()
+    {
+        AssetDatabase.SaveAssets();
+    }
+    public override void OnGUI(string searchContext)
     {
         GUILayout.Label("Pure SDK Configuration", EditorStyles.boldLabel);
         EditorGUILayout.HelpBox(
             "PublisherID is the ID that ties the location data to you as a publisher. Get your publisherID by registrating to the Unacast Self-service platform",
             MessageType.Info);
-        PureSDKConfig.publisherID = EditorGUILayout.TextField("PublisherID", PureSDKConfig.publisherID);
+        settings.publisherID = EditorGUILayout.TextField("PublisherID", settings.publisherID);
         GUILayout.Space(20);
         
         tab = GUILayout.Toolbar(tab, new[]{"iOS","Android"});
 
-        Debug.Log(tab);
         switch (tab)
         {
             case 0: 
@@ -44,10 +50,10 @@ public class PureSDKConfigMenu : EditorWindow
                 break;
         }
 
-        
+//        AssetDatabase.SaveAssets();
     }
-
-    private void iOSMenu()
+    
+      private void iOSMenu()
     {
         EditorStyles.textArea.wordWrap = true;
         GUILayout.Label("Background location information", EditorStyles.boldLabel);
@@ -55,10 +61,10 @@ public class PureSDKConfigMenu : EditorWindow
             "For the Unacast Pure SDK to be able to work on iOS, three keys needs to be added to the Information Property List.\n\n" +
             "Checking \"Genereate entries on build\" will add/override the needed keys:\n - NSLocationWhenInUseUsageDescription\n - NSLocationAlwaysUsageDescription\n - NSLocationAlwaysAndWhenInUseUsageDescription\n" +
             "using the Location Usage Description from your player settings.", MessageType.Info);
-        PureSDKConfig.generatePlistEntries =
-            EditorGUILayout.ToggleLeft("Generate location usage entries on build", PureSDKConfig.generatePlistEntries);
+        settings.generateLocationPlistEntries =
+            EditorGUILayout.ToggleLeft("Generate location usage entries on build", settings.generateLocationPlistEntries);
 
-        if (PureSDKConfig.generatePlistEntries)
+        if (settings.generateLocationPlistEntries)
         {
             EditorGUILayout.LabelField("Location Usage Description (updates your player settings):");
             PlayerSettings.iOS.locationUsageDescription = EditorGUILayout.TextArea(
@@ -109,5 +115,30 @@ public class PureSDKConfigMenu : EditorWindow
         FileUtil.CopyFileOrDirectory(pathToGradleFile,targetPath);
         
         AssetDatabase.Refresh();
+    }
+
+    
+    // Register the SettingsProvider
+    [SettingsProvider]
+    public static SettingsProvider Create()
+    {
+        var provider = new PureSDKSettingsMenu(SettingsMenuPath, SettingsScope.Project)
+        {
+            keywords = new HashSet<string>(new[]
+            {
+                "SDK", "Pure", "PublisherID", "mainTemplate", "gradle", "NSLocationWhenInUseUsageDescription",
+                "NSLocationAlwaysUsageDescription", "NSLocationAlwaysAndWhenInUseUsageDescription"
+            })
+        };
+
+        return provider;
+
+    }
+    
+    [MenuItem("Window/Unacast Pure SDK/Configure ...")]
+    static void OpenSettings()
+    {
+        // Get existing open window or if none, make a new one:
+        SettingsService.OpenProjectSettings(SettingsMenuPath);
     }
 }
