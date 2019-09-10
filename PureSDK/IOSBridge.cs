@@ -23,11 +23,9 @@ internal class IosBridge : IPureSdk
     
     private bool _isTracking;
     
-    public IosBridge(string publisherId)
+    public IosBridge()
     {
         #if UNITY_IOS
-        Debug.Log("Setting publisher ID to " + publisherId);
-        _SetPublisherID(publisherId);
         _isTracking = _IsTracking();
         #endif
     }

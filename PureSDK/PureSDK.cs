@@ -8,18 +8,18 @@ namespace Unaty.PureSDK
         
         private readonly IPureSdk _bridge;
 
-        public PureSDK(string publisherID)
+        public PureSDK()
         {
             switch (Application.platform)
             {
                 case RuntimePlatform.Android:
                     #if UNITY_ANDROID
-                    _bridge = new AndroidBridge(publisherID);
+                    _bridge = new AndroidBridge();
                     #endif
                     break;
                 case RuntimePlatform.IPhonePlayer:
                     #if UNITY_IOS
-                    _bridge = new IosBridge(publisherID);
+                    _bridge = new IosBridge();
                     #endif
                     break;
                 default:

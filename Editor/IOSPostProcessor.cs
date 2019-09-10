@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using PureSDK;
+using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 
@@ -11,8 +12,6 @@ using UnityEngine;
 
 public class IOSPostProcessor : IPostprocessBuildWithReport
 {
-    public static bool generatePlistEntries = true;
-
     public int callbackOrder { get; }
 
     public void OnPostprocessBuild(BuildReport report)
@@ -48,7 +47,9 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
         plist.ReadFromFile(plistPath);
         var rootDict = plist.root;
 
-        if (!generatePlistEntries)
+        SetPlistKey(rootDict, "PURPublisherId", PureSDKConfig.publisherID);
+        
+        if (!PureSDKConfig.generatePlistEntries)
         {
             WarnIfMissing(rootDict, "NSLocationWhenInUseUsageDescription");
             WarnIfMissing(rootDict, "NSLocationAlwaysUsageDescription");

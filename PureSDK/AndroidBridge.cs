@@ -12,7 +12,7 @@ namespace Unaty.PureSDK
 #if UNITY_ANDROID
         private readonly AndroidJavaObject _applicationContext;
 #endif
-        public AndroidBridge(string publisherId)
+        public AndroidBridge()
         {
 #if UNITY_ANDROID
             var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
@@ -20,7 +20,7 @@ namespace Unaty.PureSDK
             _applicationContext = activity.Call<AndroidJavaObject>("getApplicationContext");
 
             var sdk = GetSDK();
-            sdk.Call("init", publisherId, null);
+            sdk.Call("init", PureSDKConfig.publisherID, null);
             isTracking = sdk.Call<bool>("isTracking");
 #endif
         }

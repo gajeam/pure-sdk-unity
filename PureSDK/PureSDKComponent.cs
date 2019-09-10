@@ -5,11 +5,6 @@ namespace Unaty.PureSDK
 {
     public class PureSDKComponent : MonoBehaviour, IPureSdk
     {
-
-        [Header("Your Unacast SSP Publisher ID")]
-        [Tooltip("Your publisher ID, as defined in the Unacast SSP")]
-        public string publishedID;
-
         private PureSDK sdk;
 
         void Awake()
@@ -19,7 +14,7 @@ namespace Unaty.PureSDK
 
         private void Init()
         {
-            sdk = new PureSDK(publishedID);
+            sdk = new PureSDK();
         }
 
         public void StartTracking()
