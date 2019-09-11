@@ -18,7 +18,7 @@ public class GameState : MonoBehaviour
     public AudioClip upgradeSound;
     [HideInInspector] public int age = -1;
     public GameObject[] removeIfUnderAged;
-    
+
 
     public void GainIncome(int times = 1)
     {
@@ -40,8 +40,10 @@ public class GameState : MonoBehaviour
     public void RegisterAge(int age)
     {
         this.age = age;
+        Debug.Log("Age = " + age);
         if (!DisplayTrackingFeature())
         {
+            Debug.Log("Should not display age features as Age is = " + age);
             foreach (var obj in removeIfUnderAged)
             {
                 Destroy(obj);
@@ -53,7 +55,7 @@ public class GameState : MonoBehaviour
     {
         return IsAgeSubmitted() && age >= 16;
     }
-    
+
     public bool IsAgeSubmitted()
     {
         return age != -1;
@@ -71,7 +73,7 @@ public class GameState : MonoBehaviour
 
     public bool showTutorial
     {
-        get => bool.Parse(PlayerPrefs.GetString("showTutorial",true.ToString()));
+        get => bool.Parse(PlayerPrefs.GetString("showTutorial", true.ToString()));
         set
         {
             PlayerPrefs.SetString("showTutorial", value.ToString());
@@ -113,6 +115,7 @@ public class GameState : MonoBehaviour
             {
                 secondsPaused = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
             }
+
             LoadState();
         }
         else
@@ -152,20 +155,22 @@ public class GameState : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
     }
-    
+
     private void LoadState()
     {
-        
-        credits = PlayerPrefs.GetInt("credits",credits);
+        credits = PlayerPrefs.GetInt("credits", credits);
         upgradeCost = PlayerPrefs.GetInt("upgradeCost", upgradeCost);
         income = PlayerPrefs.GetInt("income", income);
         nextUpgradeSize = PlayerPrefs.GetInt("nextUpgradeSize", nextUpgradeSize);
-        
+
         var age = PlayerPrefs.GetInt("age", this.age);
-        RegisterAge(age);
+        if (IsAgeSubmitted())
+        {
+            RegisterAge(age);
+        }
 
         var now = DateTime.Now;
         var lastShutdown = DateTime.Parse(PlayerPrefs.GetString("lastShutdown", now.ToString()));
         secondsSincePreviousPlaySession = (now - lastShutdown).Seconds;
-}
+    }
 }
