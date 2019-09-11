@@ -91,7 +91,7 @@ public class GameState : MonoBehaviour
         {
             if (PlayerPrefs.HasKey("lastPause"))
             {
-                secondsPaused = (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).Seconds;
+                secondsPaused = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
             }
         }
         else
@@ -111,7 +111,7 @@ public class GameState : MonoBehaviour
         {
             if (PlayerPrefs.HasKey("lastPause"))
             {
-                secondsPaused = (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).Seconds;
+                secondsPaused = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
             }
             LoadState();
         }
