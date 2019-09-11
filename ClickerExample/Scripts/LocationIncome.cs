@@ -24,7 +24,6 @@ public class LocationIncome : MonoBehaviour
     //Checks to see if game has been closed while tracking was enabled and awards the corresponding income.
     private void BackgroundIncome(int seconds)
     {
-        Debug.Log("Background income! "+seconds);
         if (tracking.IsTracking() && seconds > 0)
         {
             gameState.GainIncome(seconds);
