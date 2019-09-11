@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 class PureSDKSettingsMenu : SettingsProvider
 {
     private const string SettingsMenuPath = "Project/Pure SDK";
-    private PureSDKConfig settings;
+    private PureSDKSettings settings;
 
     private int tab;
 
@@ -19,7 +19,7 @@ class PureSDKSettingsMenu : SettingsProvider
     public override void OnActivate(string searchContext, VisualElement rootElement)
     {
         // This function is called when the user clicks on the MyCustom element in the Settings window.
-        settings = PureSDKConfig.GetOrCreateSettings();
+        settings = PureSDKSettingsEditor.GetOrCreateSettings();
     }
 
     public override void OnDeactivate()

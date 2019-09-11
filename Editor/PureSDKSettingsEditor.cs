@@ -4,24 +4,18 @@ using UnityEngine;
 
 namespace PureSDK
 {
-    public class PureSDKConfig : ScriptableObject
+    public class PureSDKSettingsEditor : ScriptableObject
     {
-        private const string settingsPath = "Assets/Editor/PureSDKSettings.asset";
 
-        [SerializeField] 
-        public string publisherID;
-
-        [SerializeField]
-        public bool generateLocationPlistEntries;
-
-        public static PureSDKConfig GetOrCreateSettings()
+        public static PureSDKSettings GetOrCreateSettings()
         {
-            var settings = AssetDatabase.LoadAssetAtPath<PureSDKConfig>(settingsPath);
+            var settingsPath = PureSDKSettings.settingsPath;
+            var settings = AssetDatabase.LoadAssetAtPath<PureSDKSettings>(settingsPath);
             if (settings == null)
             {
                 
                 Directory.CreateDirectory(Path.GetDirectoryName(settingsPath));
-                settings = CreateInstance<PureSDKConfig>();
+                settings = CreateInstance<PureSDKSettings>();
                 settings.generateLocationPlistEntries = true;
                 
                 AssetDatabase.CreateAsset(settings, settingsPath);

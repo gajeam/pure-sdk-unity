@@ -20,8 +20,8 @@ namespace Unaty.PureSDK
             _applicationContext = activity.Call<AndroidJavaObject>("getApplicationContext");
 
             var sdk = GetSDK();
-//            var publisherID = PureSDKConfig.GetSerializedSettings().FindProperty("publisherID").stringValue;
-            sdk.Call("init", "NEED TO IMPLEMENT THIS!", null);
+            var publisherId = PureSDKSettings.ReadOnlyCopy().publisherID;
+            sdk.Call("init", publisherId, null);
             isTracking = sdk.Call<bool>("isTracking");
 #endif
         }
