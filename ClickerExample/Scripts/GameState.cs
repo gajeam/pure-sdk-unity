@@ -7,7 +7,6 @@ using UnityEngine.Serialization;
 
 public class GameState : MonoBehaviour
 {
-    public bool clearPlayerPrefsOnStartup = false;
     public int credits;
     public int income = 1;
     public int upgradeCost = 10;
@@ -72,15 +71,7 @@ public class GameState : MonoBehaviour
 
     public bool showTutorial
     {
-        get
-        {
-            if (!PlayerPrefs.HasKey("showTutorial"))
-            {
-                PlayerPrefs.SetString("showTutorial", true.ToString());
-            }
-
-            return bool.Parse(PlayerPrefs.GetString("showTutorial"));
-        }
+        get => bool.Parse(PlayerPrefs.GetString("showTutorial",true.ToString()));
         set
         {
             PlayerPrefs.SetString("showTutorial", value.ToString());
@@ -91,7 +82,7 @@ public class GameState : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveState();
-        SaveOnShutdown();
+        PersistShutdownTime();
     }
 
     private void OnApplicationFocus(bool hasFocus)
@@ -122,6 +113,7 @@ public class GameState : MonoBehaviour
             {
                 secondsPaused = (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).Seconds;
             }
+            LoadState();
         }
         else
         {
@@ -144,14 +136,15 @@ public class GameState : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private static void SaveOnShutdown()
+    private void PersistShutdownTime()
     {
         PlayerPrefs.SetString("lastShutdown", DateTime.Now.ToString());
     }
 
-    private static void SaveOnPause()
+    private void SaveOnPause()
     {
         PlayerPrefs.SetString("lastPause", DateTime.Now.ToString());
+        SaveState();
     }
 
     [ContextMenu("Clear Player Preferences")]
@@ -162,41 +155,17 @@ public class GameState : MonoBehaviour
     
     private void LoadState()
     {
-        if (clearPlayerPrefsOnStartup)
-        {
-            PlayerPrefs.DeleteAll();
-        }
-
-        if (PlayerPrefs.HasKey("credits"))
-        {
-            credits = PlayerPrefs.GetInt("credits");
-        }
-
-        if (PlayerPrefs.HasKey("upgradeCost"))
-        {
-            upgradeCost = PlayerPrefs.GetInt("upgradeCost");
-        }
-
-        if (PlayerPrefs.HasKey("income"))
-        {
-            income = PlayerPrefs.GetInt("income");
-        }
         
-        if (PlayerPrefs.HasKey("age"))
-        {
-            var age = PlayerPrefs.GetInt("age");
-            RegisterAge(age);
-        }
+        credits = PlayerPrefs.GetInt("credits",credits);
+        upgradeCost = PlayerPrefs.GetInt("upgradeCost", upgradeCost);
+        income = PlayerPrefs.GetInt("income", income);
+        nextUpgradeSize = PlayerPrefs.GetInt("nextUpgradeSize", nextUpgradeSize);
+        
+        var age = PlayerPrefs.GetInt("age", this.age);
+        RegisterAge(age);
 
-        if (PlayerPrefs.HasKey("nextUpgradeSize"))
-        {
-            nextUpgradeSize = PlayerPrefs.GetInt("nextUpgradeSize");
-        }
-
-        if (PlayerPrefs.HasKey("lastShutdown"))
-        {
-            secondsSincePreviousPlaySession =
-                (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastShutdown"))).Seconds;
-        }
-    }
+        var now = DateTime.Now;
+        var lastShutdown = DateTime.Parse(PlayerPrefs.GetString("lastShutdown", now.ToString()));
+        secondsSincePreviousPlaySession = (now - lastShutdown).Seconds;
+}
 }
