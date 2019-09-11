@@ -47,9 +47,9 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
         plist.ReadFromFile(plistPath);
         var rootDict = plist.root;
 
-        SetPlistKey(rootDict, "PURPublisherId", PureSDKConfig.publisherID);
+        SetPlistKey(rootDict, "PURPublisherId", PureSDKConfig.GetOrCreateSettings().publisherID);
         
-        if (!PureSDKConfig.generatePlistEntries)
+        if (!PureSDKConfig.GetOrCreateSettings().generateLocationPlistEntries)
         {
             WarnIfMissing(rootDict, "NSLocationWhenInUseUsageDescription");
             WarnIfMissing(rootDict, "NSLocationAlwaysUsageDescription");
