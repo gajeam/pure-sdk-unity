@@ -23,7 +23,7 @@ typedef void(^PURErrorBlock)(NSError * _Nullable error);
 /// Initializes the SDK. This call takes less than 80 ms (0.08 sec) to complete.
 /// You can call via dispatch_async(dispatch_get_main_queue(), ...), but this is rarely needed.
 /// We instrument this call on our test devices to ensure it never slows down your application.
-/// If the launch info dictionary is not included, we could miss out on location events.
+/// If the launch info dictionary is not included, we could miss out on some location events.
 + (void)initializeWithLaunchOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey, id> *)launchOptions
     NS_SWIFT_NAME(initialize(with:));
 
@@ -72,6 +72,8 @@ typedef void(^PURErrorBlock)(NSError * _Nullable error);
 @property (nonatomic, class, readonly) BOOL isInitialized;
 
 /// Apps with the same publisherId will have their data linked.
+/// By default, we use the `PURPublisherId` in your Info.plist.
+/// Setting this in code will override the id in the plist.
 @property (nonatomic, class) NSString *publisherId;
 
 /// We log calls to `initializeWithLaunchOptions:`, `startTracking`, and `stopTracking` in order to provide our clients with
