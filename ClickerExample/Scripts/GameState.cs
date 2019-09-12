@@ -40,10 +40,8 @@ public class GameState : MonoBehaviour
     public void RegisterAge(int age)
     {
         this.age = age;
-        Debug.Log("Age = " + age);
         if (!DisplayTrackingFeature())
         {
-            Debug.Log("Should not display age features as Age is = " + age);
             foreach (var obj in removeIfUnderAged)
             {
                 Destroy(obj);
@@ -162,15 +160,19 @@ public class GameState : MonoBehaviour
         upgradeCost = PlayerPrefs.GetInt("upgradeCost", upgradeCost);
         income = PlayerPrefs.GetInt("income", income);
         nextUpgradeSize = PlayerPrefs.GetInt("nextUpgradeSize", nextUpgradeSize);
-
-        var age = PlayerPrefs.GetInt("age", this.age);
-        if (IsAgeSubmitted())
-        {
-            RegisterAge(age);
-        }
+        LoadAge();
 
         var now = DateTime.Now;
         var lastShutdown = DateTime.Parse(PlayerPrefs.GetString("lastShutdown", now.ToString()));
         secondsSincePreviousPlaySession = (now - lastShutdown).Seconds;
+    }
+
+    private void LoadAge()
+    {
+        var loadedAge = PlayerPrefs.GetInt("age", this.age);
+        if (loadedAge != -1)
+        {
+            RegisterAge(loadedAge);
+        }
     }
 }

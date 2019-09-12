@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.UI;
 
 public class AgeDropdown : MonoBehaviour
@@ -13,7 +10,6 @@ public class AgeDropdown : MonoBehaviour
 
     public Button submitButton;
     public GameState gameState;
-
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +53,6 @@ public class AgeDropdown : MonoBehaviour
         }
 
         gameState.RegisterAge(age);
-        Debug.Log("Your age is " + age);
         gameObject.SetActive(false);
     }
 
