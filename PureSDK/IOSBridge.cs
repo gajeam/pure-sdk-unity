@@ -26,6 +26,8 @@ internal class IosBridge : IPureSdk
     public IosBridge()
     {
         #if UNITY_IOS
+        var publisherId = PureSDKSettings.ReadOnlyCopy().publisherID;
+        _SetPublisherID(publisherId);
         _isTracking = _IsTracking();
         #endif
     }
