@@ -46,6 +46,8 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
         var plist = new PlistDocument();
         plist.ReadFromFile(plistPath);
         var rootDict = plist.root;
+
+        SetPlistKey(rootDict, "PURPublisherId", PureSDKSettingsEditor.GetOrCreateSettings().publisherID);
         
         if (!PureSDKSettingsEditor.GetOrCreateSettings().generateLocationPlistEntries)
         {
