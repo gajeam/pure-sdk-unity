@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class CreditsText : MonoBehaviour
@@ -18,6 +15,6 @@ public class CreditsText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _text.text = gameState.credits.ToString();
+        _text.text = gameState.GetCreditsForDisplay();
     }
 }

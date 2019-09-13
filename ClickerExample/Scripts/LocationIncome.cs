@@ -27,7 +27,7 @@ public class LocationIncome : MonoBehaviour
         if (tracking.IsTracking() && seconds > 0)
         {
             gameState.GainIncome(seconds);
-            backgroundRewardDialog.Show(seconds * gameState.income);
+            backgroundRewardDialog.Show(GameStateUtil.FormatNumber(seconds * gameState.income));
         }
     }
 

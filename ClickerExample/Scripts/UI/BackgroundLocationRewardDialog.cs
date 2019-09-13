@@ -9,9 +9,9 @@ public class BackgroundLocationRewardDialog : MonoBehaviour, IPointerClickHandle
 {
     public Text _text;
 
-    public void Show(long nrOfGems)
+    public void Show(string nrOfGems)
     {
-        _text.text = nrOfGems.ToString();
+        _text.text = nrOfGems;
         gameObject.SetActive(true);
     }
 

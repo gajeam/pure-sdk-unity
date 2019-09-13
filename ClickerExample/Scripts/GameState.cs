@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using Unaty.PureSDK;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -25,6 +26,11 @@ public class GameState : MonoBehaviour
         credits += income * times;
     }
 
+    public string GetCreditsForDisplay()
+    {
+        return GameStateUtil.FormatNumber(this.credits);
+    }
+    
     public void Upgrade()
     {
         if (credits >= upgradeCost)

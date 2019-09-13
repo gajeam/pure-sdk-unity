@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class UpgradeCostText : MonoBehaviour
@@ -17,6 +15,6 @@ public class UpgradeCostText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _text.text = state.upgradeCost.ToString();
+        _text.text = GameStateUtil.FormatNumber(state.upgradeCost);
     }
 }
