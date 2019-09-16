@@ -1,6 +1,8 @@
 # Unacast Pure SDK Unity SDK
 **IMPORTANT: This asset is only useful if you are a registered data partner of Unacast Inc.**
 
+To get some information on the SDK or to register as a Unacast partner please contact us at <john.smith@unacast.com> 
+
 This asset contains Unacast's Pure SDK, along with example code showing how to use the SDK. 
 The Unity Pure SDK supplies a cross platform API that allows developers to develop games and application 
 in Unity targeting Android and/or iOS using the same code when connecting to the SDK.  
@@ -32,11 +34,13 @@ Unity supports this through adding a custom gradle config under `Assets/Plugins/
 
 ## No existing `mainTemplate.gradle`.
 If do not already have a `mainTemplate.gradle` in your project, you can simple add the custom code using the in-editor context menu:
-`Unaty > Android > Create Files`:
+`Window > Unacast Pure SDK > Configure...`:
 
-![android setup menu](android_menu.png)
+![android setup menu](menu.png)
 
+In this window you can click the Android tab and then click the button "Generate mainTemplateGradle". 
 This adds a new `mainTemplate.gradle` file to your project, which is automatically picked up by Unity when you build your solution for the Android platform.
+![android setup dialog](android_setup.png)
 
 ## Existing `mainTemplate.gradle`
 If you already have a `mainTemplate.gradle` file in your project, you will need to add the dependency manually as descibed below:
@@ -73,13 +77,11 @@ NOTE! Make sure you add this to the `dependencies` section of your project, not 
 To enable the SDK for iOS you need to add location permission values to your [plist.info](https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/AboutInformationPropertyListFiles.html) 
 
 This can be done by using the unity custom menu and invoking iOS.
-![iOS setup menu](ios_menu.png)
+![iOS setup menu](menu.png)
 
 This will open a dialog where you enter the information on why you are asking for location permission from your user.
-![iOS plist dialog](ios_plist.png)
+![iOS plist dialog](ios_setup.png)
 # Usage
-To be able to use the Unacast Pure SDK you must first [register as a Unacast Data Partner](https://unacastssp.itera-research.com).
-
 An embedded binary of the SDK, SDK initialization and build phase script will be added when you build your Unity project to iOS. 
 ## Quick ref
 
