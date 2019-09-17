@@ -17,6 +17,6 @@ public class UpgradeSizeText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _text.text = "+" + state.nextUpgradeSize;
+        _text.text = "+" + GameStateUtil.FormatNumber(state.nextUpgradeSize);
     }
 }
