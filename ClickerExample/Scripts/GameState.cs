@@ -97,13 +97,21 @@ public class GameState : MonoBehaviour
         {
             if (PlayerPrefs.HasKey("lastPause"))
             {
-                secondsPaused = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
+                secondsPaused = CalculateBackgroundReward();
             }
         }
         else
         {
             SaveOnPause();
         }
+    }
+
+    private static int CalculateBackgroundReward()
+    {
+        var totalSecondsSinceLastUpdate = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
+        var addedBackgroundReward = totalSecondsSinceLastUpdate / 10;
+        
+        return addedBackgroundReward;
     }
 
     private void LateUpdate()
@@ -117,7 +125,7 @@ public class GameState : MonoBehaviour
         {
             if (PlayerPrefs.HasKey("lastPause"))
             {
-                secondsPaused = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
+                secondsPaused = CalculateBackgroundReward();
             }
 
             LoadState();

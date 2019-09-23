@@ -47,7 +47,6 @@ public class LocationIncome : MonoBehaviour
         }
 
         _emitter.Emit();
-        gameState.GainIncome();
         _nextEmission += secondsBetweenIncomes;
 
     }
