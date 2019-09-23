@@ -13,7 +13,7 @@ public class GameState : MonoBehaviour
     public int upgradeCost = 10;
     public int nextUpgradeSize = 1;
     public int secondsSincePreviousPlaySession;
-    public int secondsPaused;
+    public int rewardedBackgroundTicks;
     public PureSDKComponent tracker;
     public AudioSource sfx;
     public AudioClip upgradeSound;
@@ -21,9 +21,9 @@ public class GameState : MonoBehaviour
     public GameObject[] removeIfUnderAged;
 
 
-    public void GainIncome(int times = 1)
+    public void GainIncome(int incomeSize, int times = 1)
     {
-        credits += income * times;
+        credits += incomeSize * times;
     }
 
     public string GetCreditsForDisplay()
@@ -97,7 +97,7 @@ public class GameState : MonoBehaviour
         {
             if (PlayerPrefs.HasKey("lastPause"))
             {
-                secondsPaused = CalculateBackgroundReward();
+                rewardedBackgroundTicks = CalculateBackgroundIncomeTicks();
             }
         }
         else
@@ -106,7 +106,7 @@ public class GameState : MonoBehaviour
         }
     }
 
-    private static int CalculateBackgroundReward()
+    private static int CalculateBackgroundIncomeTicks()
     {
         var totalSecondsSinceLastUpdate = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
         var addedBackgroundReward = totalSecondsSinceLastUpdate / 10;
@@ -116,7 +116,7 @@ public class GameState : MonoBehaviour
 
     private void LateUpdate()
     {
-        secondsPaused = 0;
+        rewardedBackgroundTicks = 0;
     }
 
     private void OnApplicationPause(bool pauseStatus)
@@ -125,7 +125,7 @@ public class GameState : MonoBehaviour
         {
             if (PlayerPrefs.HasKey("lastPause"))
             {
-                secondsPaused = CalculateBackgroundReward();
+                rewardedBackgroundTicks = CalculateBackgroundIncomeTicks();
             }
 
             LoadState();

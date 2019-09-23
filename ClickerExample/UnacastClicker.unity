@@ -2942,7 +2942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037a9a39d79c843d487e01bed2185252, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: {fileID: 2116235946}
 --- !u!1 &783308432
 GameObject:
   m_ObjectHideFlags: 0
@@ -9194,7 +9193,7 @@ PrefabInstance:
         type: 3}
       propertyPath: particleToSpawn
       value: 
-      objectReference: {fileID: 8847368127225843897, guid: 16524493da34143709cd0154e871c22b,
+      objectReference: {fileID: 144199978265068539, guid: 16524493da34143709cd0154e871c22b,
         type: 3}
     - target: {fileID: 2093294847026886360, guid: 1193bfeb5e08143c2936875201fa12f5,
         type: 3}
@@ -9206,6 +9205,11 @@ PrefabInstance:
       propertyPath: powerRandomness
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2093294847026886360, guid: 1193bfeb5e08143c2936875201fa12f5,
+        type: 3}
+      propertyPath: gameState
+      value: 
+      objectReference: {fileID: 2116235946}
     - target: {fileID: 2093294847026886361, guid: 1193bfeb5e08143c2936875201fa12f5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11866,7 +11870,7 @@ MonoBehaviour:
   upgradeCost: 10
   nextUpgradeSize: 1
   secondsSincePreviousPlaySession: 0
-  secondsPaused: 0
+  rewardedBackgroundTicks: 0
   tracker: {fileID: 223754479}
   sfx: {fileID: 1749982196}
   upgradeSound: {fileID: 8300000, guid: 5ec70624fb09a5643891bfc29765bace, type: 3}
@@ -11905,6 +11909,17 @@ PrefabInstance:
       propertyPath: emissionPower
       value: 70
       objectReference: {fileID: 0}
+    - target: {fileID: 2093294847026886360, guid: 1193bfeb5e08143c2936875201fa12f5,
+        type: 3}
+      propertyPath: gameState
+      value: 
+      objectReference: {fileID: 2116235946}
+    - target: {fileID: 2093294847026886360, guid: 1193bfeb5e08143c2936875201fa12f5,
+        type: 3}
+      propertyPath: particleToSpawn
+      value: 
+      objectReference: {fileID: 8068205924865685331, guid: a9bb8c988de5b43738e737230bc79728,
+        type: 3}
     - target: {fileID: 2093294847026886361, guid: 1193bfeb5e08143c2936875201fa12f5,
         type: 3}
       propertyPath: m_LocalPosition.x

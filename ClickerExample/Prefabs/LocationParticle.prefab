@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swapsTo: {fileID: 8847368127225843897, guid: 7f66f8e5ed7cd4214a5d3a67e7cd4966, type: 3}
+  gameState: {fileID: 0}
+  isColoredByValue: 0
 --- !u!1001 &1016612768398238259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,12 +132,12 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: e8e5d853daf8443779969b42f28cc038,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -0.46
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e8e5d853daf8443779969b42f28cc038,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -4.32
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e8e5d853daf8443779969b42f28cc038,
         type: 3}

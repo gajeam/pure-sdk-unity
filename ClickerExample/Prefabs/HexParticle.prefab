@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swapsTo: {fileID: 8847368127225843897, guid: 7f66f8e5ed7cd4214a5d3a67e7cd4966, type: 3}
+  gameState: {fileID: 0}
+  isColoredByValue: 1
 --- !u!1001 &8847368127079851996
 PrefabInstance:
   m_ObjectHideFlags: 0
