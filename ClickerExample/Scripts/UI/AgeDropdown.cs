@@ -32,5 +32,4 @@ public class AgeDropdown : MonoBehaviour
         gameState.RegisterAge(Int32.Parse(age.options[age.value].text));
         gameObject.SetActive(false);
     }
-
 }
