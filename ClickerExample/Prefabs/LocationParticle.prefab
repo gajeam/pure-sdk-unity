@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 8847368127225843846}
   - component: {fileID: -7475156068274400990}
   - component: {fileID: -4907686799327545971}
+  - component: {fileID: 144199978265068539}
   m_Layer: 9
   m_Name: LocationParticle
   m_TagString: Untagged
@@ -90,7 +91,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnSound: {fileID: 8300000, guid: d92ee88c0f6e25642ad6906d33e8fa08, type: 3}
-  hitSound: {fileID: 8300000, guid: c496710bfb267bb46bd8b259b0e0e97a, type: 3}
+  hitSound: {fileID: 0}
+--- !u!114 &144199978265068539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8847368127225843897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1eeb4a93c42444483eaba8dd2c8a5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swapsTo: {fileID: 8847368127225843897, guid: 7f66f8e5ed7cd4214a5d3a67e7cd4966, type: 3}
 --- !u!1001 &1016612768398238259
 PrefabInstance:
   m_ObjectHideFlags: 0

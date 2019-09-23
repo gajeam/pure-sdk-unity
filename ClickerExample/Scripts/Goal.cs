@@ -11,7 +11,9 @@ public class Goal : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         gameState.GainIncome();
-        //TODO change prefab to diamond
+        
+        var hexParticle = other.gameObject.GetComponentInParent<HexParticle>();
+        hexParticle.Swap();
     }
     
 }
