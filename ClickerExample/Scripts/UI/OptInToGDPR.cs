@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unaty.PureSDK;
 using UnityEngine;
 
-public class ConsentDialog : MonoBehaviour
+public class OptInToGDPR : MonoBehaviour
 {
     public PureSDKComponent tracker;
     
