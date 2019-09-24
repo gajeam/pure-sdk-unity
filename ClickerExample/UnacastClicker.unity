@@ -3397,12 +3397,14 @@ MonoBehaviour:
     carbon-emitting vehicles. They then donate to green causes to offset your environmental
     impact (<link=\"learnMore2\"><color=\"blue\"><u>learn more</u></color></link>).
     Your data (i.e. geolocation data, advertising ID, device and connection details)
-    may also be used by our trusted partners for the purposes of enhancing ad experience,
-    marketing campaigns, market research & analytics and as further described in our
-    Privacy Statement\n\nPlease click \u201CAccept\u201D below if you agree that we
-    may collect and process your personal data for all purposes above. You may at
-    any time exercise your rights (right of access or rectification of your data etc.)
-    and withdraw your consent."
+    may also be used by our <link=\"https://www.unacast.com/privacy/statement#thirdParties\"><color=\"blue\"><u>trusted
+    partners</u></color></link> for the purposes of enhancing ad experience, marketing
+    campaigns, market research & analytics and as further described in our <link=\"https://www.unacast.com/privacy/statement\"><color=\"blue\"><u>Privacy
+    Statement. </u></color></link>\n\nPlease click \u201CAccept\u201D below if you
+    agree that we may collect and process your personal data for all purposes above.
+    You may at any time <link=\"https://www.unacast.com/privacy/statement#rights\"><color=\"blue\"><u>exercise
+    your rights</u></color></link> (right of access or rectification of your data
+    etc.) and withdraw your consent."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
