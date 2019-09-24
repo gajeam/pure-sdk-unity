@@ -1,16 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unaty.PureSDK;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OptInToInGameReward : MonoBehaviour
 {
-    public PureSDKComponent tracker;
     public OptInToGDPR optInToGDPR;
     
     public void Accept()
     {
-        tracker.StartTracking();
+        optInToGDPR.Show();
         Hide();
     }
 
