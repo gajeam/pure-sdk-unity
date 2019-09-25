@@ -13,7 +13,7 @@ public class OpenHyperlinks : MonoBehaviour, IPointerClickHandler
 {
     public bool doesColorChangeOnHover = true;
     public Color hoverColor = new Color(60f / 255f, 120f / 255f, 1f);
-    public LocalNavigation localNavigation;
+    public OptInDialogNavigation optInDialogNavigation;
 
 
     private TextMeshProUGUI pTextMeshPro;
@@ -91,10 +91,10 @@ public class OpenHyperlinks : MonoBehaviour, IPointerClickHandler
                 switch (linkInfo.GetLinkID())
                 {
                     case "learnMore1":
-                        localNavigation.ShowLearnMore1();
+                        optInDialogNavigation.ShowLearnMore1();
                         break;
                     case "learnMore2":
-                        localNavigation.ShowLearnMore2();
+                        optInDialogNavigation.ShowLearnMore2();
                         break;
                     default:
                         Debug.Log(string.Format("don't recognize the link id: {0}, text: {1}", linkInfo.GetLinkID(), linkInfo.GetLinkText()));

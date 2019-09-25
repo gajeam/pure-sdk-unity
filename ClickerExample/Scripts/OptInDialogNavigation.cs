@@ -6,7 +6,7 @@ using Unaty.PureSDK;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class LocalNavigation : MonoBehaviour
+public class OptInDialogNavigation : MonoBehaviour
 {
     
     public GameObject learnMore1;
