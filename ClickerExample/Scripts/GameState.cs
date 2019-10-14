@@ -10,6 +10,8 @@ public class GameState : MonoBehaviour
 {
     public int credits;
     public int income = 1;
+    public int level = 1;
+    private int nrOfUpgrades = 0;
     public int upgradeCost = 10;
     public int nextUpgradeSize = 1;
     public int secondsSincePreviousPlaySession;
@@ -18,6 +20,8 @@ public class GameState : MonoBehaviour
     public AudioSource sfx;
     public AudioClip upgradeSound;
 
+    public static int upgradesToReachLevel = 2;
+    
     public void GainIncome(int incomeSize, int times = 1)
     {
         credits += incomeSize * times;
@@ -26,6 +30,11 @@ public class GameState : MonoBehaviour
     public string GetCreditsForDisplay()
     {
         return GameStateUtil.FormatNumber(this.credits);
+    }
+
+    public int GetNrToNextUpgrade()
+    {
+            return nrOfUpgrades;
     }
     
     public void Upgrade()
@@ -36,7 +45,15 @@ public class GameState : MonoBehaviour
             nextUpgradeSize *= 2;
             credits -= upgradeCost;
             upgradeCost *= 3;
+            nrOfUpgrades += 1;
             sfx.PlayOneShot(upgradeSound);
+
+            if (GetNrToNextUpgrade() == upgradesToReachLevel)
+            {
+                Debug.Log("Reached new level!");
+                nrOfUpgrades = 0;
+                level += 1;
+            }
         }
     }
 
