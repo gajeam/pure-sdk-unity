@@ -5,12 +5,14 @@ public class HexParticle : MonoBehaviour
 {
     public GameObject swapsTo;
     public GameState gameState;
-    private int value;
+    private int income;
+    private int level;
     public bool isColoredByValue;
 
     public void Start()
     {
-        value = gameState.income;
+        income = gameState.income;
+        level = gameState.level;
 
         if (isColoredByValue)
         {
@@ -23,7 +25,7 @@ public class HexParticle : MonoBehaviour
         var mesh = gameObject.GetComponentInChildren<MeshRenderer>();
 
         var newMaterial = Instantiate(mesh.material);
-        var newMaterialColor = Color.HSVToRGB((value * 10 % 255) / 255f, 1f, 0.78f, true);
+        var newMaterialColor = Color.HSVToRGB((level * 100 % 255) / 255f, 1f, 0.78f, true);
 
         newMaterial.color = newMaterialColor;
         newMaterial.SetColor("_EmissionColor", newMaterialColor);
@@ -44,6 +46,6 @@ public class HexParticle : MonoBehaviour
 
         Destroy(original);
 
-        gameState.GainIncome(value);
+        gameState.GainIncome(income);
     }
 }

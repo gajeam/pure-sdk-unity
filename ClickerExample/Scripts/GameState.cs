@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using Unaty.PureSDK;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Debug = UnityEngine.Debug;
 
 public class GameState : MonoBehaviour
 {
@@ -20,8 +22,18 @@ public class GameState : MonoBehaviour
     public AudioSource sfx;
     public AudioClip upgradeSound;
 
+    public Material skybox2;
+    public Material skybox3;
+    public Material skybox4;
+    public Material skybox5;
+    public Material skybox6;
+    public Material skybox7;
+    public Material skybox8;
+    public Material skybox9;
+    public Material skybox10;
+
     public static int upgradesToReachLevel = 2;
-    
+
     public void GainIncome(int incomeSize, int times = 1)
     {
         credits += incomeSize * times;
@@ -34,9 +46,9 @@ public class GameState : MonoBehaviour
 
     public int GetNrToNextUpgrade()
     {
-            return nrOfUpgrades;
+        return nrOfUpgrades;
     }
-    
+
     public void Upgrade()
     {
         if (credits >= upgradeCost)
@@ -53,7 +65,46 @@ public class GameState : MonoBehaviour
                 Debug.Log("Reached new level!");
                 nrOfUpgrades = 0;
                 level += 1;
+
+                ChangesForLevel();
             }
+        }
+    }
+
+    private void ChangesForLevel()
+    {
+        switch (level)
+        {
+            case 2:
+                RenderSettings.skybox = skybox2;
+                break;
+            case 3:
+                RenderSettings.skybox = skybox3;
+                break;
+            case 4:
+                RenderSettings.skybox = skybox4;
+                break;
+            case 5:
+                RenderSettings.skybox = skybox5;
+                break;
+            case 6:
+                RenderSettings.skybox = skybox6;
+                break;
+            case 7:
+                RenderSettings.skybox = skybox7;
+                break;
+            case 8:
+                RenderSettings.skybox = skybox8;
+                break;
+            case 9:
+                RenderSettings.skybox = skybox9;
+                break;
+            case 10:
+                RenderSettings.skybox = skybox10;
+                break;
+            default:
+                Debug.Log("Reached level " + level + " no new skyboxes available");
+                break;
         }
     }
 
@@ -65,6 +116,7 @@ public class GameState : MonoBehaviour
     private void Awake()
     {
         LoadState();
+        ChangesForLevel();
     }
 
     public bool showTutorial
@@ -100,9 +152,10 @@ public class GameState : MonoBehaviour
 
     private static int CalculateBackgroundIncomeTicks()
     {
-        var totalSecondsSinceLastUpdate = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
+        var totalSecondsSinceLastUpdate =
+            (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
         var addedBackgroundReward = totalSecondsSinceLastUpdate / 10;
-        
+
         return addedBackgroundReward;
     }
 
@@ -139,6 +192,8 @@ public class GameState : MonoBehaviour
         PlayerPrefs.SetInt("income", income);
         PlayerPrefs.SetInt("upgradeCost", upgradeCost);
         PlayerPrefs.SetInt("nextUpgradeSize", nextUpgradeSize);
+        PlayerPrefs.SetInt("level", level);
+        PlayerPrefs.SetInt("nrOfUpgrades", nrOfUpgrades);
         PlayerPrefs.Save();
     }
 
@@ -165,10 +220,11 @@ public class GameState : MonoBehaviour
         upgradeCost = PlayerPrefs.GetInt("upgradeCost", upgradeCost);
         income = PlayerPrefs.GetInt("income", income);
         nextUpgradeSize = PlayerPrefs.GetInt("nextUpgradeSize", nextUpgradeSize);
+        nrOfUpgrades = PlayerPrefs.GetInt("nrOfUpgrades", nrOfUpgrades);
+        level = PlayerPrefs.GetInt("level", level);
 
         var now = DateTime.Now;
         var lastShutdown = DateTime.Parse(PlayerPrefs.GetString("lastShutdown", now.ToString()));
         secondsSincePreviousPlaySession = (now - lastShutdown).Seconds;
     }
-
 }
