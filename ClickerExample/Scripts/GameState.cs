@@ -17,9 +17,6 @@ public class GameState : MonoBehaviour
     public PureSDKComponent tracker;
     public AudioSource sfx;
     public AudioClip upgradeSound;
-    [HideInInspector] public int age = -1;
-    public GameObject[] removeIfUnderAged;
-
 
     public void GainIncome(int incomeSize, int times = 1)
     {
@@ -41,28 +38,6 @@ public class GameState : MonoBehaviour
             upgradeCost *= 3;
             sfx.PlayOneShot(upgradeSound);
         }
-    }
-
-    public void RegisterAge(int age)
-    {
-        this.age = age;
-        if (!DisplayTrackingFeature())
-        {
-            foreach (var obj in removeIfUnderAged)
-            {
-                Destroy(obj);
-            }
-        }
-    }
-
-    public bool DisplayTrackingFeature()
-    {
-        return IsAgeSubmitted() && age >= 16;
-    }
-
-    public bool IsAgeSubmitted()
-    {
-        return age != -1;
     }
 
     public bool CanAffordUpgrade()
@@ -147,7 +122,6 @@ public class GameState : MonoBehaviour
         PlayerPrefs.SetInt("income", income);
         PlayerPrefs.SetInt("upgradeCost", upgradeCost);
         PlayerPrefs.SetInt("nextUpgradeSize", nextUpgradeSize);
-        PlayerPrefs.SetInt("age", age);
         PlayerPrefs.Save();
     }
 
@@ -174,19 +148,10 @@ public class GameState : MonoBehaviour
         upgradeCost = PlayerPrefs.GetInt("upgradeCost", upgradeCost);
         income = PlayerPrefs.GetInt("income", income);
         nextUpgradeSize = PlayerPrefs.GetInt("nextUpgradeSize", nextUpgradeSize);
-        LoadAge();
 
         var now = DateTime.Now;
         var lastShutdown = DateTime.Parse(PlayerPrefs.GetString("lastShutdown", now.ToString()));
         secondsSincePreviousPlaySession = (now - lastShutdown).Seconds;
     }
 
-    private void LoadAge()
-    {
-        var loadedAge = PlayerPrefs.GetInt("age", this.age);
-        if (loadedAge != -1)
-        {
-            RegisterAge(loadedAge);
-        }
-    }
 }
