@@ -24,6 +24,7 @@ public class GameState : MonoBehaviour
     public ParticleSystem upgradeEffect;
     public ParticleSystem levelEffect;
     public LevelUpScript levelUpDialog;
+    public AudioClip levelUpSound;
 
     public Material skybox2;
     public Material skybox3;
@@ -36,7 +37,7 @@ public class GameState : MonoBehaviour
     public Material skybox10;
 
 
-    public static int upgradesToReachLevel = 5;
+    public static int upgradesToReachLevel = 2;
 
     public void GainIncome(int incomeSize, int times = 1)
     {
@@ -70,7 +71,7 @@ public class GameState : MonoBehaviour
                 level += 1;
                 levelEffect.Play();
                 //TODO change to new sound
-                sfx.PlayOneShot(upgradeSound);
+                sfx.PlayOneShot(levelUpSound);
                 var dialogText = ChangesForLevel();
                 Debug.Log("Displaying levelUpDialog from Gamestate with text " + dialogText);
                 levelUpDialog.DisplayLevelUpDialog(dialogText);

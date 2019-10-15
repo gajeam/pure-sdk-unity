@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60d640027c49410c9ebc9c0c54dc196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnSound: {fileID: 8300000, guid: 78be296af618dcb4b8f698eb37163c2f, type: 3}
-  hitSound: {fileID: 0}
+  spawnSound: {fileID: 8300000, guid: c8d9c520dfb1d44189623d0a0aa50670, type: 3}
+  hitSound: {fileID: 8300000, guid: c496710bfb267bb46bd8b259b0e0e97a, type: 3}
 --- !u!114 &8068205924865685331
 MonoBehaviour:
   m_ObjectHideFlags: 0

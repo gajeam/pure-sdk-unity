@@ -6369,6 +6369,14 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19815728, guid: 847bc0ce7577e6a4992fb57041d6294b, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19815728, guid: 847bc0ce7577e6a4992fb57041d6294b, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 847bc0ce7577e6a4992fb57041d6294b, type: 3}
 --- !u!4 &1194865138 stripped
@@ -8253,6 +8261,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 19891332, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 9999
+      objectReference: {fileID: 0}
+    - target: {fileID: 19891332, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19891332, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19891332, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 470718, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
       propertyPath: m_LocalPosition.x
       value: 19.824066
@@ -8309,25 +8333,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.25439465
       objectReference: {fileID: 0}
-    - target: {fileID: 19891332, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 9999
-      objectReference: {fileID: 0}
-    - target: {fileID: 19891332, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19891332, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
-      propertyPath: InitialModule.startSizeY.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 19891332, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
-      propertyPath: InitialModule.startSizeZ.minMaxState
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 19848378, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19848378, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19848378, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bdc186a2c521f1488fe14cb4a745323, type: 3}
@@ -12779,10 +12795,11 @@ MonoBehaviour:
   rewardedBackgroundTicks: 0
   tracker: {fileID: 223754479}
   sfx: {fileID: 1749982196}
-  upgradeSound: {fileID: 8300000, guid: 5ec70624fb09a5643891bfc29765bace, type: 3}
+  upgradeSound: {fileID: 8300000, guid: 1b69365a47cf02c4dace1d726d6340d0, type: 3}
   upgradeEffect: {fileID: 1271256542}
   levelEffect: {fileID: 1194865139}
   levelUpDialog: {fileID: 1886113527}
+  levelUpSound: {fileID: 8300000, guid: a88f95669e5710245880b9d6998805d9, type: 3}
   skybox2: {fileID: 2100000, guid: 2c7e0678a6928ef40a46c31171f72c6a, type: 2}
   skybox3: {fileID: 2100000, guid: ef482af74813ee94c89c3e637f49903e, type: 2}
   skybox4: {fileID: 2100000, guid: 3b1dfe74f6c814e409f576cbcc665216, type: 2}
