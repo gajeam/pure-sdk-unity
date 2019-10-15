@@ -21,6 +21,9 @@ public class GameState : MonoBehaviour
     public PureSDKComponent tracker;
     public AudioSource sfx;
     public AudioClip upgradeSound;
+    public ParticleSystem upgradeEffect;
+    
+    public ParticleSystem levelEffect;
 
     public Material skybox2;
     public Material skybox3;
@@ -31,6 +34,7 @@ public class GameState : MonoBehaviour
     public Material skybox8;
     public Material skybox9;
     public Material skybox10;
+
 
     public static int upgradesToReachLevel = 2;
 
@@ -58,15 +62,19 @@ public class GameState : MonoBehaviour
             credits -= upgradeCost;
             upgradeCost *= 3;
             nrOfUpgrades += 1;
-            sfx.PlayOneShot(upgradeSound);
 
             if (GetNrToNextUpgrade() == upgradesToReachLevel)
             {
                 Debug.Log("Reached new level!");
                 nrOfUpgrades = 0;
                 level += 1;
-
+                levelEffect.Play();
                 ChangesForLevel();
+            }
+            else
+            {
+                sfx.PlayOneShot(upgradeSound);
+                upgradeEffect.Play();
             }
         }
     }
