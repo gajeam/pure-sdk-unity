@@ -22,8 +22,8 @@ public class GameState : MonoBehaviour
     public AudioSource sfx;
     public AudioClip upgradeSound;
     public ParticleSystem upgradeEffect;
-    
     public ParticleSystem levelEffect;
+    public LevelUpScript levelUpDialog;
 
     public Material skybox2;
     public Material skybox3;
@@ -36,7 +36,7 @@ public class GameState : MonoBehaviour
     public Material skybox10;
 
 
-    public static int upgradesToReachLevel = 2;
+    public static int upgradesToReachLevel = 5;
 
     public void GainIncome(int incomeSize, int times = 1)
     {
@@ -69,7 +69,11 @@ public class GameState : MonoBehaviour
                 nrOfUpgrades = 0;
                 level += 1;
                 levelEffect.Play();
-                ChangesForLevel();
+                //TODO change to new sound
+                sfx.PlayOneShot(upgradeSound);
+                var dialogText = ChangesForLevel();
+                Debug.Log("Displaying levelUpDialog from Gamestate with text " + dialogText);
+                levelUpDialog.DisplayLevelUpDialog(dialogText);
             }
             else
             {
@@ -79,40 +83,41 @@ public class GameState : MonoBehaviour
         }
     }
 
-    private void ChangesForLevel()
+    private string ChangesForLevel()
     {
         switch (level)
         {
             case 2:
                 RenderSettings.skybox = skybox2;
-                break;
+                return "Amazing!!! You clicked your way to level " + level + "!";
             case 3:
                 RenderSettings.skybox = skybox3;
-                break;
+                return "You are clicking it!!! Please enter level " + level + "!";
             case 4:
                 RenderSettings.skybox = skybox4;
-                break;
+                return "LEVEL " + level + "!!! Click, click, click ... ";
             case 5:
                 RenderSettings.skybox = skybox5;
-                break;
+                return "Your clicking skills earned you entrance to level " + level + "!!!";
             case 6:
                 RenderSettings.skybox = skybox6;
-                break;
+                return "You are now royal clicker champ, do your best at level " + level + ".";
             case 7:
                 RenderSettings.skybox = skybox7;
-                break;
+                return "Level " + level + " is reached!!!";
             case 8:
                 RenderSettings.skybox = skybox8;
-                break;
+                return "Clickastic this is fantastic! Proceed to level " + level + "!";
             case 9:
                 RenderSettings.skybox = skybox9;
-                break;
+                return "I ran out of stupid things to say, but you reached level " + level + "!";
             case 10:
                 RenderSettings.skybox = skybox10;
+                return "You reached the final level, you are now king or queen of clicking!";
                 break;
             default:
                 Debug.Log("Reached level " + level + " no new skyboxes available");
-                break;
+                return "Congratulations you reached level " + level + "!!!";
         }
     }
 
