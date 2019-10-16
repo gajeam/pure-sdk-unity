@@ -37,7 +37,7 @@ public class GameState : MonoBehaviour
     public Material skybox10;
 
 
-    public static int upgradesToReachLevel = 2;
+    public static int upgradesToReachLevel = 5;
 
     public void GainIncome(int incomeSize, int times = 1)
     {
@@ -66,14 +66,11 @@ public class GameState : MonoBehaviour
 
             if (GetNrToNextUpgrade() == upgradesToReachLevel)
             {
-                Debug.Log("Reached new level!");
                 nrOfUpgrades = 0;
                 level += 1;
                 levelEffect.Play();
-                //TODO change to new sound
                 sfx.PlayOneShot(levelUpSound);
                 var dialogText = ChangesForLevel();
-                Debug.Log("Displaying levelUpDialog from Gamestate with text " + dialogText);
                 levelUpDialog.DisplayLevelUpDialog(dialogText);
             }
             else
