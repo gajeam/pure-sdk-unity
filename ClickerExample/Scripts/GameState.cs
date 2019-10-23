@@ -165,7 +165,7 @@ public class GameState : MonoBehaviour
     {
         var totalSecondsSinceLastUpdate =
             (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
-        var addedBackgroundReward = totalSecondsSinceLastUpdate / 10;
+        var addedBackgroundReward = totalSecondsSinceLastUpdate / 60;
 
         return addedBackgroundReward;
     }
