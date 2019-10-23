@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnSound: {fileID: 8300000, guid: d92ee88c0f6e25642ad6906d33e8fa08, type: 3}
-  hitSound: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 89a7491201df749f992bcc92ded253de, type: 3}
 --- !u!114 &144199978265068539
 MonoBehaviour:
   m_ObjectHideFlags: 0

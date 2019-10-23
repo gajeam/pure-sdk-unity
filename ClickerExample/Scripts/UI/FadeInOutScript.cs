@@ -11,13 +11,13 @@ public class FadeInOutScript : MonoBehaviour
     void OnDisable()
     {
         if (fadeOut)
-            StartCoroutine(fadeInAndOut(gameObject, false, 0.5f));
+            StartCoroutine(fadeInAndOut(gameObject, false, 1.0f));
     }
 
     void OnEnable()
     {
         if (fadeIn)
-            StartCoroutine(fadeInAndOut(gameObject, true, 0.5f));
+            StartCoroutine(fadeInAndOut(gameObject, true, 1.0f));
     }
 
 

@@ -17,6 +17,6 @@ public class LevelText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _text.text = "Level: " + gameState.level;
+        _text.text = "Level " + gameState.level;
     }
 }
