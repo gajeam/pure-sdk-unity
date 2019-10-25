@@ -230,8 +230,6 @@ public class GameState : MonoBehaviour
         nrOfUpgrades = PlayerPrefs.GetInt("nrOfUpgrades", nrOfUpgrades);
         level = PlayerPrefs.GetInt("level", level);
 
-        var now = DateTime.Now;
-        var lastShutdown = DateTime.Parse(PlayerPrefs.GetString("lastShutdown", now.ToString()));
-        secondsSincePreviousPlaySession = (now - lastShutdown).Seconds;
+        secondsSincePreviousPlaySession = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastShutdown"))).TotalSeconds;
     }
 }
