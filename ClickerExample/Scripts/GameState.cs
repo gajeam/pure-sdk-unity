@@ -163,11 +163,7 @@ public class GameState : MonoBehaviour
 
     private static int CalculateBackgroundIncomeTicks()
     {
-        var totalSecondsSinceLastUpdate =
-            (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
-        var addedBackgroundReward = totalSecondsSinceLastUpdate / 60;
-
-        return addedBackgroundReward;
+        return (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
     }
 
     private void LateUpdate()
