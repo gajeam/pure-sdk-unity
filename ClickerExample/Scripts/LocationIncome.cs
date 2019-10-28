@@ -22,12 +22,14 @@ public class LocationIncome : MonoBehaviour
     }
 
     //Checks to see if game has been closed while tracking was enabled and awards the corresponding income.
-    private void BackgroundIncome(int ticks)
+    private void BackgroundIncome(int seconds)
     {
-        if (tracking.IsTracking() && ticks > 0)
+        var rewardedSeconds = seconds / 60;
+        
+        if (tracking.IsTracking() && rewardedSeconds > 0)
         {
-            gameState.GainIncome(gameState.income, ticks);
-            backgroundRewardDialog.Show(GameStateUtil.FormatNumber(ticks * gameState.income));
+            gameState.GainIncome(gameState.income, rewardedSeconds);
+            backgroundRewardDialog.Show(GameStateUtil.FormatNumber(rewardedSeconds * gameState.income));
         }
     }
 

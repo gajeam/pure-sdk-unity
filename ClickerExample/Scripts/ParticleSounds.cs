@@ -20,7 +20,7 @@ public class ParticleSounds : MonoBehaviour
     {
         if (spawnSound != null)
         {
-            sfx.pitch = Random.Range(0.8f, 1.2f);
+            sfx.pitch = Random.Range(0.8f, 0.9f);
             sfx.PlayOneShot(spawnSound);
         }
     }

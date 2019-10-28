@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e60d640027c49410c9ebc9c0c54dc196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnSound: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
-  hitSound: {fileID: 8300000, guid: c496710bfb267bb46bd8b259b0e0e97a, type: 3}
+  spawnSound: {fileID: 8300000, guid: 00955f9dabdd14df485673b456173a6e, type: 3}
+  hitSound: {fileID: 8300000, guid: 89a7491201df749f992bcc92ded253de, type: 3}
 --- !u!1001 &1531478727551311029
 PrefabInstance:
   m_ObjectHideFlags: 0

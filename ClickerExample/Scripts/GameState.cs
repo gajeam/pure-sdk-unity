@@ -163,11 +163,7 @@ public class GameState : MonoBehaviour
 
     private static int CalculateBackgroundIncomeTicks()
     {
-        var totalSecondsSinceLastUpdate =
-            (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
-        var addedBackgroundReward = totalSecondsSinceLastUpdate / 10;
-
-        return addedBackgroundReward;
+        return (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
     }
 
     private void LateUpdate()
@@ -234,8 +230,6 @@ public class GameState : MonoBehaviour
         nrOfUpgrades = PlayerPrefs.GetInt("nrOfUpgrades", nrOfUpgrades);
         level = PlayerPrefs.GetInt("level", level);
 
-        var now = DateTime.Now;
-        var lastShutdown = DateTime.Parse(PlayerPrefs.GetString("lastShutdown", now.ToString()));
-        secondsSincePreviousPlaySession = (now - lastShutdown).Seconds;
+        secondsSincePreviousPlaySession = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastShutdown"))).TotalSeconds;
     }
 }
