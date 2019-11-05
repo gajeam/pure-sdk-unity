@@ -2060,7 +2060,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &351259351
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2077,7 +2077,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.551}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -94, y: 64}
+  m_AnchoredPosition: {x: -228, y: 72}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351259352
@@ -5929,7 +5929,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is number of        you get for each particle you get through the ring
+  m_Text: This is number of gems you get for each particle you get through the ring
 --- !u!222 &1071236652
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13629,8 +13629,6 @@ MonoBehaviour:
   level: 1
   upgradeCost: 10
   nextUpgradeSize: 1
-  secondsSincePreviousPlaySession: 0
-  rewardedBackgroundTicks: 0
   tracker: {fileID: 0}
   sfx: {fileID: 1749982196}
   upgradeSound: {fileID: 8300000, guid: 1b69365a47cf02c4dace1d726d6340d0, type: 3}

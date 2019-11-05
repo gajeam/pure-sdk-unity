@@ -16,8 +16,7 @@ public class GameState : MonoBehaviour
     private int nrOfUpgrades = 0;
     public int upgradeCost = 10;
     public int nextUpgradeSize = 1;
-    public int secondsSincePreviousPlaySession;
-    public int rewardedBackgroundTicks;
+    private int _backgroundSeconds = 0;
     public PureSDKComponent tracker;
     public AudioSource sfx;
     public AudioClip upgradeSound;
@@ -146,46 +145,28 @@ public class GameState : MonoBehaviour
         PersistShutdownTime();
     }
 
+    public int ResetBackgroundSeconds()
+    {
+        var tempBackgroundSeconds = _backgroundSeconds;
+        _backgroundSeconds = 0;
+        return tempBackgroundSeconds;
+    }
+
     private void OnApplicationFocus(bool hasFocus)
     {
         if (hasFocus)
         {
-            if (PlayerPrefs.HasKey("lastPause"))
-            {
-                rewardedBackgroundTicks = CalculateBackgroundIncomeTicks();
-            }
-        }
-        else
-        {
-            SaveOnPause();
-        }
-    }
-
-    private static int CalculateBackgroundIncomeTicks()
-    {
-        return (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastPause"))).TotalSeconds;
-    }
-
-    private void LateUpdate()
-    {
-        rewardedBackgroundTicks = 0;
-    }
-
-    private void OnApplicationPause(bool pauseStatus)
-    {
-        if (!pauseStatus)
-        {
-            if (PlayerPrefs.HasKey("lastPause"))
-            {
-                rewardedBackgroundTicks = CalculateBackgroundIncomeTicks();
-            }
-
             LoadState();
         }
         else
         {
             SaveOnPause();
         }
+    }
+
+    private static int CalculateBackgroundIncomeTicks(string dateTimeLastRegistration)
+    {
+        return (int) (DateTime.Now - DateTime.Parse(dateTimeLastRegistration)).TotalSeconds;
     }
 
     private void OnDisable()
@@ -230,6 +211,35 @@ public class GameState : MonoBehaviour
         nrOfUpgrades = PlayerPrefs.GetInt("nrOfUpgrades", nrOfUpgrades);
         level = PlayerPrefs.GetInt("level", level);
 
-        secondsSincePreviousPlaySession = (int) (DateTime.Now - DateTime.Parse(PlayerPrefs.GetString("lastShutdown"))).TotalSeconds;
+        LoadBackgroundIncome();
+    }
+
+    private void LoadBackgroundIncome()
+    {
+        int incomeFromShutDown = 0;
+        if (PlayerPrefs.HasKey("lastShutdown"))
+        {
+            incomeFromShutDown = CalculateBackgroundIncomeTicks(PlayerPrefs.GetString("lastShutdown"));
+            PlayerPrefs.DeleteKey("lastShutdown");
+        }
+
+        int incomeFromPause = 0;
+        if (PlayerPrefs.HasKey("lastPause"))
+        {
+            incomeFromPause = CalculateBackgroundIncomeTicks(PlayerPrefs.GetString("lastPause"));
+            PlayerPrefs.DeleteKey("lastPause");
+        }
+
+        if (incomeFromPause > 0 || incomeFromShutDown > 0)
+        {
+            if (incomeFromPause > incomeFromShutDown)
+            {
+                _backgroundSeconds = incomeFromPause;
+            }
+            else
+            {
+                _backgroundSeconds = incomeFromShutDown;
+            }
+        }
     }
 }

@@ -18,7 +18,15 @@ public class LocationIncome : MonoBehaviour
     {
         _emitter = GetComponent<HexEmitter>();
         _nextEmission = Time.time + secondsBetweenIncomes;
-        BackgroundIncome(gameState.secondsSincePreviousPlaySession);
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            var secondsSinceLastPause = gameState.ResetBackgroundSeconds();
+            BackgroundIncome(secondsSinceLastPause);
+        }
     }
 
     //Checks to see if game has been closed while tracking was enabled and awards the corresponding income.
@@ -41,7 +49,6 @@ public class LocationIncome : MonoBehaviour
             _nextEmission = Time.time + secondsBetweenIncomes;
             return;
         }
-        BackgroundIncome(gameState.rewardedBackgroundTicks);
 
         if (Time.time < _nextEmission)
         {
@@ -50,6 +57,5 @@ public class LocationIncome : MonoBehaviour
 
         _emitter.Emit();
         _nextEmission += secondsBetweenIncomes;
-
     }
 }
