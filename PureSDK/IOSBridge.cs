@@ -26,9 +26,8 @@ internal class IosBridge : IPureSdk
     public IosBridge()
     {
         #if UNITY_IOS
-        //var publisherId = PureSDKSettings.ReadOnlyCopy().publisherID;
-        //_SetPublisherID(publisherId);
         _isTracking = _IsTracking();
+        Debug.Log("Checking the SDK if we are tracking. SDK reports isTracking = " + _isTracking);
         #endif
     }
 
@@ -38,15 +37,16 @@ internal class IosBridge : IPureSdk
         #if UNITY_IOS
         _StartTracking();
         _isTracking = true;
+        Debug.Log("Start tracking setting tracking = " + _isTracking);
         #endif
     }
     
     public void StopTracking()
     {
         #if UNITY_IOS
-        Debug.Log("Stop tracking");
         _StopTracking();
         _isTracking = false;
+        Debug.Log("Stop tracking setting tracking = " + _isTracking);
         #endif
     }
 

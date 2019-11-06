@@ -2,7 +2,6 @@
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
-
 #if UNITY_IOS
 using System.IO;
 using UnityEditor.iOS.Xcode;
@@ -48,7 +47,7 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
         var rootDict = plist.root;
 
         SetPlistKey(rootDict, "PURPublisherId", PureSDKSettingsEditor.GetOrCreateSettings().publisherID);
-        
+
         if (!PureSDKSettingsEditor.GetOrCreateSettings().generateLocationPlistEntries)
         {
             WarnIfMissing(rootDict, "NSLocationWhenInUseUsageDescription");
@@ -64,9 +63,20 @@ public class IOSPostProcessor : IPostprocessBuildWithReport
                 "Location Usage Description is blank. Make sure you give your users a good description of why you are asking for Location!");
         }
 
+        //First permission pop-up
         SetPlistKey(rootDict, "NSLocationWhenInUseUsageDescription", locationUsageDescription);
         SetPlistKey(rootDict, "NSLocationAlwaysUsageDescription", locationUsageDescription);
-        SetPlistKey(rootDict, "NSLocationAlwaysAndWhenInUseUsageDescription", locationUsageDescription);
+
+        //Second permission pop-up
+        if (PureSDKSettingsEditor.GetOrCreateSettings().askForAlwaysText == null ||
+            PureSDKSettingsEditor.GetOrCreateSettings().askForAlwaysText.Trim() == "")
+        {
+            SetPlistKey(rootDict, "NSLocationAlwaysAndWhenInUseUsageDescription", locationUsageDescription);
+        }
+        else
+        {
+            SetPlistKey(rootDict, "NSLocationAlwaysAndWhenInUseUsageDescription", PureSDKSettingsEditor.GetOrCreateSettings().askForAlwaysText);
+        }
 
         // Write to file
         File.WriteAllText(plistPath, plist.WriteToString());

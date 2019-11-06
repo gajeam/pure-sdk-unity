@@ -35,7 +35,6 @@ public class GameState : MonoBehaviour
     public Material skybox9;
     public Material skybox10;
 
-
     public static int upgradesToReachLevel = 5;
 
     public void GainIncome(int incomeSize, int times = 1)

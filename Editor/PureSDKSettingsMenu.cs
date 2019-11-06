@@ -69,6 +69,16 @@ class PureSDKSettingsMenu : SettingsProvider
             EditorGUILayout.LabelField("Location Usage Description (updates your player settings):");
             PlayerSettings.iOS.locationUsageDescription = EditorGUILayout.TextArea(
                 PlayerSettings.iOS.locationUsageDescription, EditorStyles.textArea, GUILayout.Height(60));
+            
+            EditorGUILayout.HelpBox(
+                "From iOS 13 the user will be presented with two different pop-ups asking for permission.\n\n" +
+                "If you want to have a specific message for when user is asked if hi/her want to switch to permission \"Always\" you can enter your text underneath. \n\n" +
+                "If you don't specify this, the text from \"Location Usage Description\" will be used for both.", MessageType.Info);
+            EditorGUILayout.LabelField("Location Usage Description re-prompted (with iOS 13 this is the prompt that asks if you want to switch to location always):");
+
+            settings.askForAlwaysText  = EditorGUILayout.TextArea(
+                settings.askForAlwaysText, EditorStyles.textArea, GUILayout.Height(60));
+            
             EditorGUILayout.HelpBox(
                 "If you already define all or some of these PList entries elsewhere, you should handle this by editing your .plist files directly.",
                 MessageType.Warning);

@@ -8,6 +8,7 @@ namespace PureSDK
         public const string settingsPath = "Assets/Resources/" + resourceName + ".asset";
 
         [SerializeField] public string publisherID;
+        [SerializeField] public string askForAlwaysText;
 
         [SerializeField] public bool generateLocationPlistEntries;
 
