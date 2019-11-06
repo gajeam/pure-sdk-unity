@@ -3,7 +3,7 @@
 public class GameStateUtil
 {
 
-    public static string FormatNumber(int number)
+    public static string FormatNumber(long number)
     {
         if (number > 999999999 || number < -999999999 )
         {

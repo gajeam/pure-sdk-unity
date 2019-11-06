@@ -10,7 +10,7 @@ using Debug = UnityEngine.Debug;
 
 public class GameState : MonoBehaviour
 {
-    public int credits;
+    public long credits;
     public int income = 1;
     public int level = 1;
     private int nrOfUpgrades = 0;
@@ -175,7 +175,7 @@ public class GameState : MonoBehaviour
 
     private void SaveState()
     {
-        PlayerPrefs.SetInt("credits", credits);
+        PlayerPrefs.SetString("credits", credits.ToString());
         PlayerPrefs.SetInt("income", income);
         PlayerPrefs.SetInt("upgradeCost", upgradeCost);
         PlayerPrefs.SetInt("nextUpgradeSize", nextUpgradeSize);
@@ -203,7 +203,7 @@ public class GameState : MonoBehaviour
 
     private void LoadState()
     {
-        credits = PlayerPrefs.GetInt("credits", credits);
+        credits = Convert.ToInt64(PlayerPrefs.GetString("credits", credits.ToString()));
         upgradeCost = PlayerPrefs.GetInt("upgradeCost", upgradeCost);
         income = PlayerPrefs.GetInt("income", income);
         nextUpgradeSize = PlayerPrefs.GetInt("nextUpgradeSize", nextUpgradeSize);
