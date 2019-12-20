@@ -6,8 +6,13 @@
 //  Copyright © 2018 fluxLoop AS. All rights reserved.
 //
 
+@import Foundation;
+@import UIKit;
+@import CoreLocation;
+
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <@import CoreLocation/@import CoreLocation;.h>
 
 #include <AvailabilityMacros.h>
 
@@ -38,6 +43,18 @@ typedef void(^PURErrorBlock)(NSError * _Nullable error);
 /// If YES, then the SDK is actively collecting events.
 /// The method is asynchronous since the SDK may not be done initializing when this method is called.
 + (void)isSDKTracking:(void (^)(BOOL))isTracking;
+
+/// Use this method if you want to check whether the SDK is delivering data.
+/// SDK is collecting & delivering data if the following condition is met :
+///
+/// @code
+/// BOOL isAccepted = authorization == kCLAuthorizationStatusAuthorizedAlways \
+///                   || authorization == kCLAuthorizationStatusAuthorizedWhenInUse;
+/// BOOL isSDKDeliveringData = isTrackingEnabled && locationServicesEnabled && isAccepted;
+/// @endcode
++ (void)fetchTrackingStatus:(void (^)(BOOL isTrackingEnabled,
+                                      BOOL locationServicesEnabled,
+                                      CLAuthorizationStatus authorization))trackingStatus;
 
 /// The current session's Pure Identifier. Will be nil until `initializeWithLaunchOptions` is called.
 /// The method is asynchronous since the SDK may not be done initializing when this method is called.
@@ -75,6 +92,9 @@ typedef void(^PURErrorBlock)(NSError * _Nullable error);
 /// By default, we use the `PURPublisherId` in your Info.plist.
 /// Setting this in code will override the id in the plist.
 @property (nonatomic, class) NSString *publisherId;
+
+/// The PureSDK version.
+@property (nonatomic, class, readonly) NSString *version;
 
 /// We log calls to `initializeWithLaunchOptions:`, `startTracking`, and `stopTracking` in order to provide our clients with
 /// a more complete picture of the devices which have PureSDK enabled. If lightweight analytics are enabled, session lengths

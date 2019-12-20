@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using PureSDK;
 using UnityEngine;
 
