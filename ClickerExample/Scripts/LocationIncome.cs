@@ -32,13 +32,25 @@ public class LocationIncome : MonoBehaviour
     //Checks to see if game has been closed while tracking was enabled and awards the corresponding income.
     private void BackgroundIncome(int seconds)
     {
-        var rewardedSeconds = seconds / 60;
-        
+        var rewardedSeconds = CalculateRewardedSeconds(seconds);
+
         if (tracking.IsTracking() && rewardedSeconds > 0)
         {
-            gameState.GainIncome(gameState.income, rewardedSeconds);
             backgroundRewardDialog.Show(GameStateUtil.FormatNumber(rewardedSeconds * gameState.income));
+            gameState.GainIncome(gameState.income, rewardedSeconds);
         }
+    }
+
+    private static int CalculateRewardedSeconds(int seconds)
+    {
+        if (seconds < 60)
+        {
+            //Rewarding every 4 seconds 
+            return seconds / 4;
+        }
+
+        //Rewarding every 4 seconds the first minute(+15), then 1 each minute
+        return (seconds - 60) / 60 + 15;
     }
 
     //Awards income every second while tracking is enabled

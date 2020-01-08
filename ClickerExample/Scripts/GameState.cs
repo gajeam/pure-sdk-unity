@@ -37,9 +37,28 @@ public class GameState : MonoBehaviour
 
     public static int upgradesToReachLevel = 5;
 
+
+    IEnumerator IncrementTo(long incrementTo, int incomeSize)
+    {
+        while (credits < incrementTo)
+        {
+            if (credits + incomeSize > incrementTo)
+            {
+                credits = incrementTo;
+            }
+            else
+            {
+                credits += incomeSize;
+            }
+            yield return new WaitForSeconds(0.00001F);
+        }
+    }
+
     public void GainIncome(int incomeSize, int times = 1)
     {
-        credits += incomeSize * times;
+        var newCredits = incomeSize * times;
+        var incrementTo = newCredits + credits;
+        StartCoroutine(IncrementTo(incrementTo, incomeSize));
     }
 
     public string GetCreditsForDisplay()
@@ -112,7 +131,7 @@ public class GameState : MonoBehaviour
                 return "You reached the final level, you are now king or queen of clicking!";
                 break;
             default:
-                Debug.Log("Reached level " + level + " no new skyboxes available");
+                Debug.Log("Reached level " + level + " no new galaxies available");
                 return "Congratulations you reached level " + level + "!!!";
         }
     }
