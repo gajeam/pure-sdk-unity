@@ -6,7 +6,6 @@ using UnityEngine;
 public class LocationIncome : MonoBehaviour
 {
     public PureSDKComponent tracking;
-    public GameState gameState;
     public BackgroundLocationRewardDialog backgroundRewardDialog;
 
     public float secondsBetweenIncomes = 1;
@@ -20,25 +19,18 @@ public class LocationIncome : MonoBehaviour
         _nextEmission = Time.time + secondsBetweenIncomes;
     }
 
-    private void OnApplicationFocus(bool hasFocus)
-    {
-        if (hasFocus)
-        {
-            var secondsSinceLastPause = gameState.ResetBackgroundSeconds();
-            BackgroundIncome(secondsSinceLastPause);
-        }
-    }
-
     //Checks to see if game has been closed while tracking was enabled and awards the corresponding income.
-    private void BackgroundIncome(int seconds)
+    public int CalculateBackgroundIncome(int seconds, int gameIncome)
     {
         var rewardedSeconds = CalculateRewardedSeconds(seconds);
 
         if (tracking.IsTracking() && rewardedSeconds > 0)
         {
-            backgroundRewardDialog.Show(GameStateUtil.FormatNumber(rewardedSeconds * gameState.income));
-            gameState.GainIncome(gameState.income, rewardedSeconds);
+            backgroundRewardDialog.Show(GameStateUtil.FormatNumber(rewardedSeconds * gameIncome));
+            return rewardedSeconds;
         }
+
+        return 0;
     }
 
     private static int CalculateRewardedSeconds(int seconds)

@@ -6,15 +6,10 @@
 //  Copyright © 2018 fluxLoop AS. All rights reserved.
 //
 
-@import Foundation;
-@import UIKit;
-@import CoreLocation;
-
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <@import CoreLocation/@import CoreLocation;.h>
-
-#include <AvailabilityMacros.h>
+#import <CoreLocation/CoreLocation.h>
+#import <AvailabilityMacros.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

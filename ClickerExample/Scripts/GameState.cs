@@ -16,14 +16,13 @@ public class GameState : MonoBehaviour
     private int nrOfUpgrades = 0;
     public int upgradeCost = 10;
     public int nextUpgradeSize = 1;
-    private int _backgroundSeconds = 0;
-    public PureSDKComponent tracker;
     public AudioSource sfx;
     public AudioClip upgradeSound;
     public ParticleSystem upgradeEffect;
     public ParticleSystem levelEffect;
     public LevelUpScript levelUpDialog;
     public AudioClip levelUpSound;
+    public LocationIncome locationIncome;
 
     public Material skybox2;
     public Material skybox3;
@@ -50,6 +49,7 @@ public class GameState : MonoBehaviour
             {
                 credits += incomeSize;
             }
+
             yield return new WaitForSeconds(0.00001F);
         }
     }
@@ -163,13 +163,6 @@ public class GameState : MonoBehaviour
         PersistShutdownTime();
     }
 
-    public int ResetBackgroundSeconds()
-    {
-        var tempBackgroundSeconds = _backgroundSeconds;
-        _backgroundSeconds = 0;
-        return tempBackgroundSeconds;
-    }
-
     private void OnApplicationFocus(bool hasFocus)
     {
         if (hasFocus)
@@ -229,10 +222,11 @@ public class GameState : MonoBehaviour
         nrOfUpgrades = PlayerPrefs.GetInt("nrOfUpgrades", nrOfUpgrades);
         level = PlayerPrefs.GetInt("level", level);
 
-        LoadBackgroundIncome();
+        int rewardedBackgroundIncome = locationIncome.CalculateBackgroundIncome(GetBackgroundSeconds(), income);
+        GainIncome(income, rewardedBackgroundIncome);
     }
 
-    private void LoadBackgroundIncome()
+    private int GetBackgroundSeconds()
     {
         int incomeFromShutDown = 0;
         if (PlayerPrefs.HasKey("lastShutdown"))
@@ -252,12 +246,14 @@ public class GameState : MonoBehaviour
         {
             if (incomeFromPause > incomeFromShutDown)
             {
-                _backgroundSeconds = incomeFromPause;
+                return incomeFromPause;
             }
             else
             {
-                _backgroundSeconds = incomeFromShutDown;
+                return incomeFromShutDown;
             }
         }
+
+        return 0;
     }
 }
