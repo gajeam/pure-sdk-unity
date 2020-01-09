@@ -2769,7 +2769,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tracking: {fileID: 223754479}
-  gameState: {fileID: 2116235946}
   backgroundRewardDialog: {fileID: 1667416256}
   secondsBetweenIncomes: 1
 --- !u!1 &425984086
@@ -13851,13 +13850,13 @@ MonoBehaviour:
   level: 1
   upgradeCost: 10
   nextUpgradeSize: 1
-  tracker: {fileID: 0}
   sfx: {fileID: 1749982196}
   upgradeSound: {fileID: 8300000, guid: 1b69365a47cf02c4dace1d726d6340d0, type: 3}
   upgradeEffect: {fileID: 1271256542}
   levelEffect: {fileID: 1194865139}
   levelUpDialog: {fileID: 1886113527}
   levelUpSound: {fileID: 8300000, guid: a88f95669e5710245880b9d6998805d9, type: 3}
+  locationIncome: {fileID: 424315581}
   skybox2: {fileID: 2100000, guid: 2c7e0678a6928ef40a46c31171f72c6a, type: 2}
   skybox3: {fileID: 2100000, guid: ef482af74813ee94c89c3e637f49903e, type: 2}
   skybox4: {fileID: 2100000, guid: 3b1dfe74f6c814e409f576cbcc665216, type: 2}
