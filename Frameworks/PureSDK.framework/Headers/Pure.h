@@ -16,6 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^PURSuccessBlock)(void);
 typedef void(^PURErrorBlock)(NSError * _Nullable error);
 
+@interface PURTrackingInfo : NSObject
+
+@property (nonatomic, readonly) BOOL isTrackingEnabled;
+@property (nonatomic, readonly) BOOL locationServicesEnabled;
+@property (nonatomic, readonly) CLAuthorizationStatus locationAuthorization;
+
+@property (nonatomic, readonly) BOOL isUserMonitized;
+
+@end
+
 /// All methods require that initializeWithLaunchOptions: has been called.
 /// Errors will be printed to the console if the SDK is not initialized.
 @interface Pure : NSObject
@@ -36,24 +46,15 @@ typedef void(^PURErrorBlock)(NSError * _Nullable error);
 + (void)stopTracking;
 
 /// If YES, then the SDK is actively collecting events.
-/// The method is asynchronous since the SDK may not be done initializing when this method is called.
-+ (void)isSDKTracking:(void (^)(BOOL))isTracking;
+@property (class, nonatomic, readonly) BOOL isTracking;
 
 /// Use this method if you want to check whether the SDK is delivering data.
-/// SDK is collecting & delivering data if the following condition is met :
-///
-/// @code
-/// BOOL isAccepted = authorization == kCLAuthorizationStatusAuthorizedAlways \
-///                   || authorization == kCLAuthorizationStatusAuthorizedWhenInUse;
-/// BOOL isSDKDeliveringData = isTrackingEnabled && locationServicesEnabled && isAccepted;
-/// @endcode
-+ (void)fetchTrackingStatus:(void (^)(BOOL isTrackingEnabled,
-                                      BOOL locationServicesEnabled,
-                                      CLAuthorizationStatus authorization))trackingStatus;
+/// SDK is collecting & delivering data if `trackingInfo.isUserMonitized` is `YES`.
+/// Will be nil until `initializeWithLaunchOptions` is called.
+@property (class, nonatomic, readonly, nullable) PURTrackingInfo *trackingInfo;
 
 /// The current session's Pure Identifier. Will be nil until `initializeWithLaunchOptions` is called.
-/// The method is asynchronous since the SDK may not be done initializing when this method is called.
-+ (void)fetchPureIdentifier:(void (^)(NSString * _Nullable))pureIdentifier;
+@property (class, nonatomic, readonly, nullable) NSString *pureIdentifier;
 
 /// See documentation below. Defaults to force = NO.
 + (void)createEventWithType:(NSString *)type payload:(NSDictionary *)payload
@@ -98,19 +99,19 @@ typedef void(^PURErrorBlock)(NSError * _Nullable error);
 
 #pragma mark - Deprecated
 
+// Following methods deprecated in 1.0.95
+
++ (void)fetchPureIdentifier:(void (^)(NSString * _Nullable))pureIdentifierBlock __attribute__((deprecated));
+
++ (void)isSDKTracking:(void (^)(BOOL))isTracking __attribute__((deprecated));
+
++ (void)fetchTrackingStatus:(void (^)(BOOL isTrackingEnabled,
+                                      BOOL locationServicesEnabled,
+                                      CLAuthorizationStatus authorization))trackingStatus __attribute__((deprecated));
+
 // Following methods deprecated in 1.0.90
 
 @property (nonatomic, class) BOOL loggingEnabled __attribute__((deprecated));
-
-// Following methods deprecated in 1.0.74
-
-+ (BOOL)isTracking __attribute__((deprecated("Use +isSDKTracking:")));
-+ (NSString * _Nullable)pureId __attribute__((deprecated("Use +fetchPureIdentifier:")));
-
-// Following methods deprecated in 1.0.60
-
-+ (void)startWithLaunchOptions:(NSDictionary *)launchOptions
-    __attribute__((deprecated("Use +initializeWithLaunchOptions:")));
 
 @end
 
