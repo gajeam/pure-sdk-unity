@@ -39,18 +39,19 @@ public class GameState : MonoBehaviour
 
     IEnumerator IncrementTo(long incrementTo, int incomeSize)
     {
-        while (credits < incrementTo)
+        int numberOfLoops = 0;
+        while (credits < incrementTo )
         {
-            if (credits + incomeSize > incrementTo)
+            if (credits + incomeSize > incrementTo || numberOfLoops > 800)
             {
                 credits = incrementTo;
             }
             else
             {
                 credits += incomeSize;
+                numberOfLoops++;
+                yield return new WaitForSeconds(0.00001F);
             }
-
-            yield return new WaitForSeconds(0.00001F);
         }
     }
 
