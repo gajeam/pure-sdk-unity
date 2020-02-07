@@ -40,9 +40,9 @@ public class GameState : MonoBehaviour
     IEnumerator IncrementTo(long incrementTo, int incomeSize)
     {
         int numberOfLoops = 0;
-        while (credits < incrementTo )
+        while (credits < incrementTo)
         {
-            if (credits + incomeSize > incrementTo || numberOfLoops > 800)
+            if (credits + incomeSize > incrementTo || numberOfLoops > 20)
             {
                 credits = incrementTo;
             }
